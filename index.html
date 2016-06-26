@@ -555,7 +555,55 @@ public:
         return true;
     }
 };
-</code></pre>
+</code></pre><h2 id="Single-Number"><a href="#Single-Number" class="headerlink" title="Single Number"></a>Single Number</h2><p>Given an array of integers, every element appears twice except for one. Find that single one.</p>
+<p>给定一个整形数组，只有一个数字出现了一次，其余的都出现了两次，找到这个只出现了一次的数组。</p>
+<p>这个题第一次看到的时候，我是这样做的：</p>
+<pre><code>class Solution {
+public:
+    int singleNumber(vector&lt;int&gt;&amp; nums) {
+
+        int temp;
+
+        for (int i=0;i&lt;nums.size();i++)
+        {
+            temp = nums[i];
+            bool flag = false;
+            for(int j=0;j&lt;nums.size();j++)
+            {
+                if(j==i)continue;
+                if(temp == nums[j])
+                flag = true;
+            }
+
+            if(flag == false)
+                break;
+
+        }
+            return temp;
+    }
+};
+</code></pre><p>时间复杂度为O(n^2)，结果是：Time Limit Exceeded</p>
+<p>后来发现有两个公式：</p>
+<blockquote>
+<ul>
+<li>a ⊕ a = 0</li>
+<li>a ⊕ 0 = a</li>
+</ul>
+</blockquote>
+<p>可以写出一段特别简单的代码：</p>
+<pre><code>class Solution {
+public:
+    int singleNumber(vector&lt;int&gt;&amp; nums) {
+        int temp=0;
+        for(int i=0;i&lt;nums.size();i++)
+        {
+            temp = temp xor nums[i];
+        }
+        return temp;  
+    }
+};
+</code></pre><p>时间复杂度为O(n)。</p>
+
           
         
       
