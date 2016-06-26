@@ -100,7 +100,7 @@ Example:Given s = “hello”, return “olleh”.
 class Solution {
 public:
     s">
-<meta property="og:updated_time" content="2016-06-26T15:40:34.020Z">
+<meta property="og:updated_time" content="2016-06-26T15:52:33.555Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode题解">
 <meta name="twitter:description" content="按Acceptance从大到小排序，等我全部做完以后再按类型分类。
@@ -306,6 +306,36 @@ public:
         return s;     
     }
 };
+</code></pre><h2 id="Nim-Game"><a href="#Nim-Game" class="headerlink" title="Nim Game"></a>Nim Game</h2><p>You are playing the following Nim Game with your friend: There is a heap of stones on the table, each time one of you take turns to remove 1 to 3 stones. The one who removes the last stone will be the winner. You will take the first turn to remove the stones.</p>
+<p>可以拿1-3个石子，拿到最后一个石子的人获胜，假设你是第一个拿石子的人。</p>
+<p>Both of you are very clever and have optimal strategies for the game. Write a function to determine whether you can win the game given the number of stones in the heap.</p>
+<p>For example, if there are 4 stones in the heap, then you will never win the game: no matter 1, 2, or 3 stones you remove, the last stone will always be removed by your friend.</p>
+<p>分析：</p>
+<blockquote>
+<ul>
+<li>0 块石子 - false</li>
+<li>1 块石子 - true</li>
+<li>2 块石子 - true</li>
+<li>3 块石子 - true</li>
+<li>4 块石子 - false</li>
+<li>5 块石子 - true</li>
+<li>6 块石子 - true</li>
+<li>7 块石子 - true</li>
+<li>8 块石子 - false</li>
+</ul>
+</blockquote>
+<p>发现，当是4块时，这时要拿石子的人不管拿1-3中的几块，都会失败</p>
+<p>而总数是5块时，可以拿1块让总数变成4块，总数是6块时，可以拿2块让总数变成4块…..</p>
+<p>以此类推，发现当4的倍数时失败，其余情况成功。</p>
+<pre><code>class Solution {
+public:
+    bool canWinNim(int n) {
+        if(n%4 == 0)
+        return false;
+        else 
+        return true;
+    }
+};
 </code></pre>
       
     </div>
@@ -444,7 +474,7 @@ public:
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-String"><span class="nav-number">1.</span> <span class="nav-text">Reverse String</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-String"><span class="nav-number">1.</span> <span class="nav-text">Reverse String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nim-Game"><span class="nav-number">2.</span> <span class="nav-text">Nim Game</span></a></li></ol></div>
             
           </div>
         </section>
