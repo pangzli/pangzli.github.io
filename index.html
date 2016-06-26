@@ -228,6 +228,202 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/27/LeetCode题解/" itemprop="url">
+                  LeetCode题解
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-27T00:00:00+08:00" content="2016-06-27">
+              2016-06-27
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/27/LeetCode题解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/27/LeetCode题解/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>按Acceptance从大到小排序，等我全部做完以后再按类型分类。</p>
+<h2 id="Reverse-String"><a href="#Reverse-String" class="headerlink" title="Reverse String"></a>Reverse String</h2><p>Write a function that takes a string as input and returns the string reversed.</p>
+<p>Example:<br>Given s = “hello”, return “olleh”.</p>
+<pre><code>class Solution {
+public:
+    string reverseString(string s) {
+        if(s == &quot;&quot;)return &quot;&quot;;
+        char temp;
+        int len = s.length();
+        for(int i=0;i&lt;len/2;i++)
+        {
+            temp = s[i];
+            s[i]=s[s.length()-i-1];
+            s[s.length()-i-1] = temp;
+        }
+        return s;     
+    }
+};
+</code></pre><h2 id="Nim-Game"><a href="#Nim-Game" class="headerlink" title="Nim Game"></a>Nim Game</h2><p>You are playing the following Nim Game with your friend: There is a heap of stones on the table, each time one of you take turns to remove 1 to 3 stones. The one who removes the last stone will be the winner. You will take the first turn to remove the stones.</p>
+<p>可以拿1-3个石子，拿到最后一个石子的人获胜，假设你是第一个拿石子的人。</p>
+<p>Both of you are very clever and have optimal strategies for the game. Write a function to determine whether you can win the game given the number of stones in the heap.</p>
+<p>For example, if there are 4 stones in the heap, then you will never win the game: no matter 1, 2, or 3 stones you remove, the last stone will always be removed by your friend.</p>
+<p>分析：</p>
+<blockquote>
+<ul>
+<li>0 块石子 - false</li>
+<li>1 块石子 - true</li>
+<li>2 块石子 - true</li>
+<li>3 块石子 - true</li>
+<li>4 块石子 - false</li>
+<li>5 块石子 - true</li>
+<li>6 块石子 - true</li>
+<li>7 块石子 - true</li>
+<li>8 块石子 - false</li>
+</ul>
+</blockquote>
+<p>发现，当是4块时，这时要拿石子的人不管拿1-3中的几块，都会失败</p>
+<p>而总数是5块时，可以拿1块让总数变成4块，总数是6块时，可以拿2块让总数变成4块…..</p>
+<p>以此类推，发现当4的倍数时失败，其余情况成功。</p>
+<pre><code>class Solution {
+public:
+    bool canWinNim(int n) {
+        if(n%4 == 0)
+        return false;
+        else 
+        return true;
+    }
+};
+</code></pre><h2 id="Single-Number"><a href="#Single-Number" class="headerlink" title="Single Number"></a>Single Number</h2><p>Given an array of integers, every element appears twice except for one. Find that single one.</p>
+<p>给定一个整形数组，只有一个数字出现了一次，其余的都出现了两次，找到这个只出现了一次的数组。</p>
+<p>这个题第一次看到的时候，我是这样做的：</p>
+<pre><code>class Solution {
+public:
+    int singleNumber(vector&lt;int&gt;&amp; nums) {
+
+        int temp;
+
+        for (int i=0;i&lt;nums.size();i++)
+        {
+            temp = nums[i];
+            bool flag = false;
+            for(int j=0;j&lt;nums.size();j++)
+            {
+                if(j==i)continue;
+                if(temp == nums[j])
+                flag = true;
+            }
+
+            if(flag == false)
+                break;
+
+        }
+            return temp;
+    }
+};
+</code></pre><p>时间复杂度为O(n^2)，结果是：Time Limit Exceeded</p>
+<p>后来发现有两个公式：</p>
+<blockquote>
+<ul>
+<li>a ⊕ a = 0</li>
+<li>a ⊕ 0 = a</li>
+</ul>
+</blockquote>
+<p>可以写出一段特别简单的代码：</p>
+<pre><code>class Solution {
+public:
+    int singleNumber(vector&lt;int&gt;&amp; nums) {
+        int temp=0;
+        for(int i=0;i&lt;nums.size();i++)
+        {
+            temp = temp xor nums[i];
+        }
+        return temp;  
+    }
+};
+</code></pre><p>时间复杂度为O(n)。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/26/Markdown入门/" itemprop="url">
                   Markdown基本介绍
                 </a>
@@ -407,202 +603,6 @@
 <blockquote>
 <p><code>ctrl+a</code>    </p>
 </blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/26/LeetCode题解/" itemprop="url">
-                  LeetCode题解
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-26T00:00:00+08:00" content="2016-06-26">
-              2016-06-26
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/26/LeetCode题解/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/26/LeetCode题解/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>按Acceptance从大到小排序，等我全部做完以后再按类型分类。</p>
-<h2 id="Reverse-String"><a href="#Reverse-String" class="headerlink" title="Reverse String"></a>Reverse String</h2><p>Write a function that takes a string as input and returns the string reversed.</p>
-<p>Example:<br>Given s = “hello”, return “olleh”.</p>
-<pre><code>class Solution {
-public:
-    string reverseString(string s) {
-        if(s == &quot;&quot;)return &quot;&quot;;
-        char temp;
-        int len = s.length();
-        for(int i=0;i&lt;len/2;i++)
-        {
-            temp = s[i];
-            s[i]=s[s.length()-i-1];
-            s[s.length()-i-1] = temp;
-        }
-        return s;     
-    }
-};
-</code></pre><h2 id="Nim-Game"><a href="#Nim-Game" class="headerlink" title="Nim Game"></a>Nim Game</h2><p>You are playing the following Nim Game with your friend: There is a heap of stones on the table, each time one of you take turns to remove 1 to 3 stones. The one who removes the last stone will be the winner. You will take the first turn to remove the stones.</p>
-<p>可以拿1-3个石子，拿到最后一个石子的人获胜，假设你是第一个拿石子的人。</p>
-<p>Both of you are very clever and have optimal strategies for the game. Write a function to determine whether you can win the game given the number of stones in the heap.</p>
-<p>For example, if there are 4 stones in the heap, then you will never win the game: no matter 1, 2, or 3 stones you remove, the last stone will always be removed by your friend.</p>
-<p>分析：</p>
-<blockquote>
-<ul>
-<li>0 块石子 - false</li>
-<li>1 块石子 - true</li>
-<li>2 块石子 - true</li>
-<li>3 块石子 - true</li>
-<li>4 块石子 - false</li>
-<li>5 块石子 - true</li>
-<li>6 块石子 - true</li>
-<li>7 块石子 - true</li>
-<li>8 块石子 - false</li>
-</ul>
-</blockquote>
-<p>发现，当是4块时，这时要拿石子的人不管拿1-3中的几块，都会失败</p>
-<p>而总数是5块时，可以拿1块让总数变成4块，总数是6块时，可以拿2块让总数变成4块…..</p>
-<p>以此类推，发现当4的倍数时失败，其余情况成功。</p>
-<pre><code>class Solution {
-public:
-    bool canWinNim(int n) {
-        if(n%4 == 0)
-        return false;
-        else 
-        return true;
-    }
-};
-</code></pre><h2 id="Single-Number"><a href="#Single-Number" class="headerlink" title="Single Number"></a>Single Number</h2><p>Given an array of integers, every element appears twice except for one. Find that single one.</p>
-<p>给定一个整形数组，只有一个数字出现了一次，其余的都出现了两次，找到这个只出现了一次的数组。</p>
-<p>这个题第一次看到的时候，我是这样做的：</p>
-<pre><code>class Solution {
-public:
-    int singleNumber(vector&lt;int&gt;&amp; nums) {
-
-        int temp;
-
-        for (int i=0;i&lt;nums.size();i++)
-        {
-            temp = nums[i];
-            bool flag = false;
-            for(int j=0;j&lt;nums.size();j++)
-            {
-                if(j==i)continue;
-                if(temp == nums[j])
-                flag = true;
-            }
-
-            if(flag == false)
-                break;
-
-        }
-            return temp;
-    }
-};
-</code></pre><p>时间复杂度为O(n^2)，结果是：Time Limit Exceeded</p>
-<p>后来发现有两个公式：</p>
-<blockquote>
-<ul>
-<li>a ⊕ a = 0</li>
-<li>a ⊕ 0 = a</li>
-</ul>
-</blockquote>
-<p>可以写出一段特别简单的代码：</p>
-<pre><code>class Solution {
-public:
-    int singleNumber(vector&lt;int&gt;&amp; nums) {
-        int temp=0;
-        for(int i=0;i&lt;nums.size();i++)
-        {
-            temp = temp xor nums[i];
-        }
-        return temp;  
-    }
-};
-</code></pre><p>时间复杂度为O(n)。</p>
 
           
         
