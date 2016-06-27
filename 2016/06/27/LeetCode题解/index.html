@@ -100,7 +100,7 @@ Example:Given s = “hello”, return “olleh”.
 class Solution {
 public:
     s">
-<meta property="og:updated_time" content="2016-06-26T16:09:40.731Z">
+<meta property="og:updated_time" content="2016-06-27T03:54:37.345Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode题解">
 <meta name="twitter:description" content="按Acceptance从大到小排序，等我全部做完以后再按类型分类。
@@ -393,6 +393,57 @@ public:
     }
 };
 </code></pre><p>时间复杂度为O(n)。</p>
+<h2 id="Add-Digits"><a href="#Add-Digits" class="headerlink" title="Add Digits"></a>Add Digits</h2><p>Given a non-negative integer num, repeatedly add all its digits until the result has only one digit.</p>
+<p>For example:</p>
+<p>Given num = 38, the process is like: 3 + 8 = 11, 1 + 1 = 2. Since 2 has only one digit, return it.    </p>
+<p>我用了递归的方法，当结果是两位数时继续相加，当为个位数是开始返回。</p>
+<pre><code>class Solution {
+public:
+    int addDigits(int num) {
+        if(num&gt;=10)
+            return addDigits(num/10+num%10);
+        else
+            return num;
+    }
+};
+</code></pre><p>后来，在网上找更优的解法，发现下面这个算法。</p>
+<pre><code>// Let&apos;s observe the pattern
+//    1    1
+//    2    2
+//    ... ...
+//    8    8    
+//    9    9    
+//    10    1
+//    11    2
+//    12    3    
+//    ... ...
+//    17    8
+//    18    9
+//    19    1
+//    20    2
+//    ...  ...
+// It looks most of number just simply %9 is the answer, 
+// but there are some edge cases.
+//    9%9=0 but we need 9. 
+//    18%9=0 but we need 9
+// so we can find the solution is:
+//    1) num &lt;=9, return num
+//    2) num &gt; 9, reutrn num%9 if num%9&gt;0
+//                return 9 if num%9 ==0
+int addDigits03(int num) {
+    return num &gt;9 ? ((num %9)==0 ? 9:num%9) : num;
+}
+
+//But actually, we can use (num-1)%9 + 1 to make all cases right.
+int addDigits04(int num){
+    return (num - 1) % 9 + 1;
+}
+
+//This solution is similar with pervious solution.
+int addDigits05(int num){
+    return num - 9 * ((num - 1)/9);
+}
+</code></pre><p>上面这三个算法，都是同一种思路，发现当给定的数不是9的倍数时，结果是该数%9的结果，否则结果是9。</p>
 
       
     </div>
@@ -527,7 +578,7 @@ public:
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-String"><span class="nav-number">1.</span> <span class="nav-text">Reverse String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nim-Game"><span class="nav-number">2.</span> <span class="nav-text">Nim Game</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number"><span class="nav-number">3.</span> <span class="nav-text">Single Number</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-String"><span class="nav-number">1.</span> <span class="nav-text">Reverse String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nim-Game"><span class="nav-number">2.</span> <span class="nav-text">Nim Game</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number"><span class="nav-number">3.</span> <span class="nav-text">Single Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-Digits"><span class="nav-number">4.</span> <span class="nav-text">Add Digits</span></a></li></ol></div>
             
           </div>
         </section>
