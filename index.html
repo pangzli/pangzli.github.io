@@ -435,7 +435,34 @@ int addDigits05(int num){
     return num - 9 * ((num - 1)/9);
 }
 </code></pre><p>上面这三个算法，都是同一种思路，发现当给定的数不是9的倍数时，结果是该数%9的结果，否则结果是9。</p>
+<h2 id="Maximum-Depth-of-Binary-Tree"><a href="#Maximum-Depth-of-Binary-Tree" class="headerlink" title="Maximum Depth of Binary Tree"></a>Maximum Depth of Binary Tree</h2><p>Given a binary tree, find its maximum depth.</p>
+<p>The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.</p>
+<pre><code>/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int maxDepth(TreeNode* root) {
 
+        if(root==NULL)
+        return 0;
+
+        int left = maxDepth(root-&gt;left);
+        int right = maxDepth(root-&gt;right);
+
+        if(left&gt;right)
+            return left+1;
+        else
+            return right+1;
+    }
+};
+</code></pre>
           
         
       
