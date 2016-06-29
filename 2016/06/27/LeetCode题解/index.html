@@ -100,7 +100,7 @@ Example:Given s = “hello”, return “olleh”.
 class Solution {
 public:
     s">
-<meta property="og:updated_time" content="2016-06-27T04:03:15.103Z">
+<meta property="og:updated_time" content="2016-06-29T15:15:14.545Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode题解">
 <meta name="twitter:description" content="按Acceptance从大到小排序，等我全部做完以后再按类型分类。
@@ -471,7 +471,63 @@ public:
             return right+1;
     }
 };
-</code></pre>
+</code></pre><p>利用递归的方法，每层的深度是左子树与右子树中高的那个加一。</p>
+<h2 id="Reverse-Linked-List"><a href="#Reverse-Linked-List" class="headerlink" title="Reverse Linked List"></a>Reverse Linked List</h2><p>Reverse a singly linked list.</p>
+<p>A linked list can be reversed either iteratively or recursively. Could you implement both?</p>
+<p>迭代方法（iteratively）：</p>
+<pre><code>/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head){
+
+        if(head==NULL||head-&gt;next==NULL) return head;
+
+        ListNode *newN = head; // 新排序好的第一个
+        ListNode *oldN = newN-&gt;next; // 待排序的第一个
+        head -&gt; next = NULL;  // 将头结点的next清空
+        ListNode *tempN = NULL; // 定义一个临时变量存储oldN的下一个
+
+        while(oldN) // 不断将结点的next反向
+        {
+            tempN = oldN-&gt;next;
+            oldN-&gt;next = newN;
+            newN = oldN;
+            oldN = tempN;
+        }
+
+        return newN;
+    }
+};
+</code></pre><p>递归方法（recursively）：</p>
+<pre><code>/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head){
+        if (head==NULL || head-&gt;next==NULL) return head;
+
+        ListNode *h = reverseList(head-&gt;next);
+        head-&gt;next-&gt;next = head;
+        head-&gt;next = NULL;
+
+        return h;
+    }
+};
+</code></pre><p>递归方法简单易懂。</p>
+
       
     </div>
 
@@ -605,7 +661,7 @@ public:
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-String"><span class="nav-number">1.</span> <span class="nav-text">Reverse String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nim-Game"><span class="nav-number">2.</span> <span class="nav-text">Nim Game</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number"><span class="nav-number">3.</span> <span class="nav-text">Single Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-Digits"><span class="nav-number">4.</span> <span class="nav-text">Add Digits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maximum-Depth-of-Binary-Tree"><span class="nav-number">5.</span> <span class="nav-text">Maximum Depth of Binary Tree</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-String"><span class="nav-number">1.</span> <span class="nav-text">Reverse String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nim-Game"><span class="nav-number">2.</span> <span class="nav-text">Nim Game</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number"><span class="nav-number">3.</span> <span class="nav-text">Single Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-Digits"><span class="nav-number">4.</span> <span class="nav-text">Add Digits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maximum-Depth-of-Binary-Tree"><span class="nav-number">5.</span> <span class="nav-text">Maximum Depth of Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-Linked-List"><span class="nav-number">6.</span> <span class="nav-text">Reverse Linked List</span></a></li></ol></div>
             
           </div>
         </section>

@@ -462,7 +462,63 @@ public:
             return right+1;
     }
 };
-</code></pre>
+</code></pre><p>利用递归的方法，每层的深度是左子树与右子树中高的那个加一。</p>
+<h2 id="Reverse-Linked-List"><a href="#Reverse-Linked-List" class="headerlink" title="Reverse Linked List"></a>Reverse Linked List</h2><p>Reverse a singly linked list.</p>
+<p>A linked list can be reversed either iteratively or recursively. Could you implement both?</p>
+<p>迭代方法（iteratively）：</p>
+<pre><code>/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head){
+
+        if(head==NULL||head-&gt;next==NULL) return head;
+
+        ListNode *newN = head; // 新排序好的第一个
+        ListNode *oldN = newN-&gt;next; // 待排序的第一个
+        head -&gt; next = NULL;  // 将头结点的next清空
+        ListNode *tempN = NULL; // 定义一个临时变量存储oldN的下一个
+
+        while(oldN) // 不断将结点的next反向
+        {
+            tempN = oldN-&gt;next;
+            oldN-&gt;next = newN;
+            newN = oldN;
+            oldN = tempN;
+        }
+
+        return newN;
+    }
+};
+</code></pre><p>递归方法（recursively）：</p>
+<pre><code>/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head){
+        if (head==NULL || head-&gt;next==NULL) return head;
+
+        ListNode *h = reverseList(head-&gt;next);
+        head-&gt;next-&gt;next = head;
+        head-&gt;next = NULL;
+
+        return h;
+    }
+};
+</code></pre><p>递归方法简单易懂。</p>
+
           
         
       
