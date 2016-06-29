@@ -100,7 +100,7 @@ Example:Given s = “hello”, return “olleh”.
 class Solution {
 public:
     s">
-<meta property="og:updated_time" content="2016-06-29T15:15:14.545Z">
+<meta property="og:updated_time" content="2016-06-29T15:41:07.391Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode题解">
 <meta name="twitter:description" content="按Acceptance从大到小排序，等我全部做完以后再按类型分类。
@@ -527,7 +527,70 @@ public:
     }
 };
 </code></pre><p>递归方法简单易懂。</p>
+<h2 id="Counting-Bits"><a href="#Counting-Bits" class="headerlink" title="Counting Bits"></a>Counting Bits</h2><p>Given a non negative integer number num. For every numbers i in the range 0 ≤ i ≤ num calculate the number of 1’s in their binary representation and return them as an array.</p>
+<p>Example:<br>For num = 5 you should return [0,1,1,2,1,2].</p>
+<p>计算从0到num一共num+1个数，每个数的二进制形式中1的个数，组成一个数组。</p>
+<pre><code>class Solution {
+public:
+    vector&lt;int&gt; countBits(int num) {
+        vector&lt;int&gt; temp(num+1, 0);
 
+        for (int i=0;i&lt;num+1;i++)
+        {
+            temp[i]=numOf1(i);
+        }
+
+        return temp;
+
+    }
+    int numOf1(int n) // 剑指offer书里介绍的一种非常巧妙地计算一个二进制数中1的个数的算法
+    {
+        int count = 0;
+        while(n)
+        {
+            ++ count;
+            n = n &amp; (n-1);
+        }
+
+        return count;
+    }
+};
+</code></pre><h2 id="Invert-Binary-Tree"><a href="#Invert-Binary-Tree" class="headerlink" title="Invert Binary Tree"></a>Invert Binary Tree</h2><p>Invert a binary tree.</p>
+<pre><code>     4
+   /   \
+  2     7
+ / \   / \
+1   3 6   9
+</code></pre><p>to</p>
+<pre><code>     4
+   /   \
+  7     2
+ / \   / \
+9   6 3   1
+</code></pre><p>Google: 90% of our engineers use the software you wrote (Homebrew), but you can’t invert a binary tree on a whiteboard so fuck off.（2333333333</p>
+<p>递归算法：</p>
+<pre><code>/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* invertTree(TreeNode* root) {
+        if(root==NULL)return root;
+
+        TreeNode *temp = invertTree(root-&gt;left); // 将左边的保存
+        root-&gt;left = invertTree(root-&gt;right); // 左右互换
+        root-&gt;right = temp;
+
+        return root;   
+    }
+};
+</code></pre>
       
     </div>
 
@@ -661,7 +724,7 @@ public:
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-String"><span class="nav-number">1.</span> <span class="nav-text">Reverse String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nim-Game"><span class="nav-number">2.</span> <span class="nav-text">Nim Game</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number"><span class="nav-number">3.</span> <span class="nav-text">Single Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-Digits"><span class="nav-number">4.</span> <span class="nav-text">Add Digits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maximum-Depth-of-Binary-Tree"><span class="nav-number">5.</span> <span class="nav-text">Maximum Depth of Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-Linked-List"><span class="nav-number">6.</span> <span class="nav-text">Reverse Linked List</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-String"><span class="nav-number">1.</span> <span class="nav-text">Reverse String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nim-Game"><span class="nav-number">2.</span> <span class="nav-text">Nim Game</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number"><span class="nav-number">3.</span> <span class="nav-text">Single Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-Digits"><span class="nav-number">4.</span> <span class="nav-text">Add Digits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maximum-Depth-of-Binary-Tree"><span class="nav-number">5.</span> <span class="nav-text">Maximum Depth of Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-Linked-List"><span class="nav-number">6.</span> <span class="nav-text">Reverse Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Counting-Bits"><span class="nav-number">7.</span> <span class="nav-text">Counting Bits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Invert-Binary-Tree"><span class="nav-number">8.</span> <span class="nav-text">Invert Binary Tree</span></a></li></ol></div>
             
           </div>
         </section>
