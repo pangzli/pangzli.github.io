@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/06/27/LeetCode题解/index.html">
 <meta property="og:site_name" content="胖子李">
 <meta property="og:description" content="开了个大坑，慢慢来，顺序是按Acceptance从大到小排序，等我全部做完以后再按类型分类，一天做两三个估计得三四个月（233">
-<meta property="og:updated_time" content="2016-07-14T05:28:22.159Z">
+<meta property="og:updated_time" content="2016-07-16T14:58:52.276Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode题解">
 <meta name="twitter:description" content="开了个大坑，慢慢来，顺序是按Acceptance从大到小排序，等我全部做完以后再按类型分类，一天做两三个估计得三四个月（233">
@@ -730,6 +730,79 @@ public:
         node-&gt;next = node-&gt;next-&gt;next;
     }
 };
+</code></pre><h2 id="Product-of-Array-Except-Self"><a href="#Product-of-Array-Except-Self" class="headerlink" title="Product of Array Except Self"></a>Product of Array Except Self</h2><p>Given an array of n integers where n &gt; 1, nums, return an array output such that output[i] is equal to the product of all the elements of nums except nums[i].</p>
+<p>Solve it without division and in O(n).</p>
+<p>For example, given [1,2,3,4], return [24,12,8,6].</p>
+<p>Follow up:<br>Could you solve it with constant space complexity? (Note: The output array does not count as extra space for the purpose of space complexity analysis.)</p>
+<p>题目限定了我们不能用除法,时间复杂度为O(n),空间复杂度为O(1),可以先正序遍历一遍数组，每一个位置上存这个位置之前所有数字的乘积。那么一遍下来，最后一个位置上的数字是之前所有数字之积,此时再后序遍历数组，每个位置上的数在乘以后面所有数字之积，对于最后一个位置来说，由于后面没有数字了，所以乘以1。</p>
+<pre><code>class Solution {
+public:
+    vector&lt;int&gt; productExceptSelf(vector&lt;int&gt;&amp; nums) {
+        vector&lt;int&gt; output(nums.size(),1);
+
+        for(int i=1;i&lt;nums.size();i++)
+        {
+            output[i]=output[i-1]*nums[i-1];
+        }
+
+        int right=1;
+        for(int i=nums.size()-1;i&gt;=0;i--)
+        {
+            output[i] *= right;
+            right *= nums[i];
+        }
+
+        return output;
+    }
+};
+</code></pre><h2 id="Same-Tree"><a href="#Same-Tree" class="headerlink" title="Same Tree"></a>Same Tree</h2><p>Given two binary trees, write a function to check if they are equal or not.</p>
+<p>Two binary trees are considered equal if they are structurally identical and the nodes have the same value.</p>
+<p>这个题明显可以用递归的方法解决,不过要考虑两种特殊的情况,当都是空的时候是真的,当有一个空的时候是假的.</p>
+<pre><code>/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+        if(!p &amp;&amp; !q) return true;
+        if(!p || !q) return false;
+        return (p-&gt;val==q-&gt;val)&amp;&amp;(isSameTree(p-&gt;left,q-&gt;left))&amp;&amp;(isSameTree(p-&gt;right,q-&gt;right));
+    }
+};
+</code></pre><p>##Excel Sheet Column Title##</p>
+<p>Given a positive integer, return its corresponding column title as appear in an Excel sheet.</p>
+<p>For example:</p>
+<ul>
+<li>1 -&gt; A</li>
+<li>2 -&gt; B</li>
+<li>3 -&gt; C</li>
+<li>…</li>
+<li>26 -&gt; Z</li>
+<li>27 -&gt; AA</li>
+<li>28 -&gt; AB </li>
+</ul>
+<p>注意当这个数能被26整除时,要-1防止多出现一个A</p>
+<pre><code>class Solution {
+public:
+    string convertToTitle(int n) {
+        string res;
+        while(n&gt;0)
+        {
+            char ch = &apos;A&apos; + (n-1)%26;
+            res.insert(res.begin(), ch);
+            if(n%26==0) n=n-1;
+            n /= 26;
+        }
+
+        return res;
+    }
+};
 </code></pre>
       
     </div>
@@ -879,7 +952,7 @@ public:
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-String"><span class="nav-number">1.</span> <span class="nav-text">Reverse String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nim-Game"><span class="nav-number">2.</span> <span class="nav-text">Nim Game</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number"><span class="nav-number">3.</span> <span class="nav-text">Single Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-Digits"><span class="nav-number">4.</span> <span class="nav-text">Add Digits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maximum-Depth-of-Binary-Tree"><span class="nav-number">5.</span> <span class="nav-text">Maximum Depth of Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-Linked-List"><span class="nav-number">6.</span> <span class="nav-text">Reverse Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Counting-Bits"><span class="nav-number">7.</span> <span class="nav-text">Counting Bits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Invert-Binary-Tree"><span class="nav-number">8.</span> <span class="nav-text">Invert Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sum-of-Two-Integers"><span class="nav-number">9.</span> <span class="nav-text">Sum of Two Integers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number-III"><span class="nav-number">10.</span> <span class="nav-text">Single Number III</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Move-Zeroes"><span class="nav-number">11.</span> <span class="nav-text">Move Zeroes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Intersection-of-Two-Arrays"><span class="nav-number">12.</span> <span class="nav-text">Intersection of Two Arrays</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Delete-Node-in-a-Linked-List"><span class="nav-number">13.</span> <span class="nav-text">Delete Node in a Linked List</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-String"><span class="nav-number">1.</span> <span class="nav-text">Reverse String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nim-Game"><span class="nav-number">2.</span> <span class="nav-text">Nim Game</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number"><span class="nav-number">3.</span> <span class="nav-text">Single Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-Digits"><span class="nav-number">4.</span> <span class="nav-text">Add Digits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maximum-Depth-of-Binary-Tree"><span class="nav-number">5.</span> <span class="nav-text">Maximum Depth of Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-Linked-List"><span class="nav-number">6.</span> <span class="nav-text">Reverse Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Counting-Bits"><span class="nav-number">7.</span> <span class="nav-text">Counting Bits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Invert-Binary-Tree"><span class="nav-number">8.</span> <span class="nav-text">Invert Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sum-of-Two-Integers"><span class="nav-number">9.</span> <span class="nav-text">Sum of Two Integers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number-III"><span class="nav-number">10.</span> <span class="nav-text">Single Number III</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Move-Zeroes"><span class="nav-number">11.</span> <span class="nav-text">Move Zeroes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Intersection-of-Two-Arrays"><span class="nav-number">12.</span> <span class="nav-text">Intersection of Two Arrays</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Delete-Node-in-a-Linked-List"><span class="nav-number">13.</span> <span class="nav-text">Delete Node in a Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Product-of-Array-Except-Self"><span class="nav-number">14.</span> <span class="nav-text">Product of Array Except Self</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Same-Tree"><span class="nav-number">15.</span> <span class="nav-text">Same Tree</span></a></li></ol></div>
             
           </div>
         </section>
