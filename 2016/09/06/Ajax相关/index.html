@@ -1,0 +1,795 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Ajax(Asynchronous JavaScript and XML),异步的JavaScript与XML.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ajax相关">
+<meta property="og:url" content="http://yoursite.com/2016/09/06/Ajax相关/index.html">
+<meta property="og:site_name" content="胖子李">
+<meta property="og:description" content="Ajax(Asynchronous JavaScript and XML),异步的JavaScript与XML.">
+<meta property="og:image" content="http://i4.buimg.com/567571/aa960010b80ffd66.png">
+<meta property="og:image" content="http://i4.buimg.com/567571/d5f5c0a0f9c2c2a2.png">
+<meta property="og:updated_time" content="2016-09-06T12:22:42.448Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ajax相关">
+<meta name="twitter:description" content="Ajax(Asynchronous JavaScript and XML),异步的JavaScript与XML.">
+<meta name="twitter:image" content="http://i4.buimg.com/567571/aa960010b80ffd66.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/06/Ajax相关/"/>
+
+  <title> Ajax相关 | 胖子李 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?0e848dc3bf106cbfb59929b6254ac0d0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">胖子李</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一个人的命运啊，当然要靠自我奋斗。但是，也要考虑到历史的行程。（手动滑稽</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Ajax相关
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-06T00:00:00+08:00" content="2016-09-06">
+              2016-09-06
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/06/Ajax相关/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/06/Ajax相关/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+		  
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Ajax(Asynchronous JavaScript and XML),异步的JavaScript与XML.</p>
+<a id="more"></a>
+<p>##Ajax基本介绍##</p>
+<p><strong>Ajax</strong>(Asynchronous JavaScript and XML),异步的JavaScript与XML.<br>相比于全部刷新的同步,异步的方式会大大减少从服务器请求数据的大小,典型的例子是点击加载新的评论,百度首页的智能搜索等.<br>当然,现在从服务器端请求的数据格式已经不单单是XML了,更多的是json数据格式,利用jQuery封装的Ajax可以更好的接受不同类型的数据格式.</p>
+<p>Ajax中最重要的一个对象就是<strong>XMLHttpRequest</strong>，它相当于浏览器和服务器之间的一个中转站,将本来直接接触的两方分隔开,使用户操作与服务器响应分隔开,xhr并不会把所有的用户操作都提交给服务器,而是将像—些数据验证和数据处理等操作交给Ajax引擎自己来做, 只有确定需要从服务器读取新数据时再由Ajax引擎代为向服务器提交请求。</p>
+<p>##get和post两种情况的原生Ajax##<br>原生的Ajax代码较为复杂,但是自己理解掌握了原生的Ajax代码可以帮助我们更好地使用jQuery的Ajax封装.</p>
+<p>get方式请求数据的Ajax代码.</p>
+<pre><code>//1 创建XMLHttpRequest
+var xhr = null;
+if (XMLHttpRequest) {
+    xhr = new XMLHttpRequest();
+}else{
+    //兼容IE6以前的老IE
+    xhr = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+}
+
+//2 初始化
+//利用get方式发送请求,open(发送方式,url地址,是否为异步,默认为异步)
+xhr.open(&quot;get&quot;,&quot;php/login.php?username=abc&amp;password=123,true);
+
+//3 注册XMLHttpRequest状态发生改变的事件（回调函数）
+xhr.onreadystatechange = function () {
+    //判断注册XMLHttpRequest的状态
+
+    //0 XMLHttpRequest创建完对象
+    //1 初始化完成 open
+    //2 发送请求  send
+    //3 正在接收数据
+    //4 接收完成
+    if (xhr.readyState == 4) {
+        //判断http响应的状态码，是否成功
+        if (xhr.status == 200) {
+            time.innerHTML = xhr.responseText;
+        }else{
+            time.innerHTML = &quot;服务器内部错误&quot;;
+        }
+
+    }
+}
+
+//4 发送请求
+xhr.send(null);
+</code></pre><p>向服务器发送请求的方式绝大部分是<strong>get和post</strong>两种,大部分为get,直接在url地址后面跟<br>?username=abc&amp;password=123之类的参数,用&amp;分隔.</p>
+<p>而某些提交需要保密的内容(如帐号密码)或者需要提交的参数特别多时,此时需要使用post方式提交,这时原生的Ajax与get方式的Ajax有一定的差别.</p>
+<pre><code>var msg = document.getElementById(&quot;msg&quot;);
+
+ // 准备好要post的数据
+var name = document.getElementById(&quot;txtName&quot;).value;
+var pwd = document.getElementById(&quot;txtPwd&quot;).value;
+var data = &quot;username=&quot;+ name +&quot;&amp;passw=&quot;+ pwd;
+
+//1
+var xhr = null;
+if (XMLHttpRequest) {
+    xhr = new XMLHttpRequest();
+}else{
+    xhr = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+}
+//2
+xhr.open(&quot;post&quot;,&quot;php/login.php&quot;,true);
+
+//必须在open之后。设置请求头
+xhr.setRequestHeader(&quot;Content-Type&quot;,&quot;application/x-www-form-urlencoded&quot;);
+
+//3
+xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4) {
+        if (xhr.status == 200) {
+            //处理服务器返回的结果
+            var result = xhr.responseText;
+            //0 失败  1成功
+            if (result == 1) {
+                msg.innerHTML = &quot;登录成功&quot;;
+            }else{
+                msg.innerHTML = &quot;登录失败&quot;;
+            }
+        }else{
+            msg.innerHTML = &quot;服务器内部错误&quot;;
+        }
+    }
+}
+
+//4
+xhr.send(data);
+</code></pre><p>主体结构是一致的,都分为四步,但是还是有两三处差异.</p>
+<h2 id="jQuery封装的Ajax"><a href="#jQuery封装的Ajax" class="headerlink" title="jQuery封装的Ajax"></a>jQuery封装的Ajax</h2><p>jQuery封装的Ajax可以简单的解决这个问题,那么我们首先要知道大体的形式</p>
+<pre><code>$.ajax({
+    type:&quot;get&quot;, //请求方式
+    cache:false,//不缓存
+    url:&quot;php/login.php&quot;, //请求的路径
+    dataType:&quot;json&quot;, //返回的数据格式,可以为xml json
+    success: function (data) {
+        alert(data.reason);
+    },
+    error: function () {
+        alert(&quot;错误&quot;);
+    }
+});
+</code></pre><p>我们所要做的大部分工作是 </p>
+<pre><code>success: function (data) {
+    alert(data.reason);
+},
+</code></pre><p>在这一段中添加代码,这里是成功请求到数据后,要对数据进行处理,并在网页上呈现出来,有事需要添加很多标签,这时就可以使用一些模版,例如下面所要说的artTemplate.</p>
+<h2 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h2><p>jsonp并不是另一种特殊的数据格式,而是json的一种补丁.</p>
+<p>有时我们需要调用第三方的接口来获取数据,这时原生Ajax并不能跨域获取数据,原生的解决方法是动态的生成script标签,设置src来获取不同源服务器端的数据.服务器返回的json使用一个函数包裹，页面写一个函数，当获取到服务器返回的数据后执行该函数.</p>
+<p>浏览器的同源策略：<strong>ajax请求的 协议、域名、端口必须一致</strong></p>
+<p>这时是以函数参数的形式传递数据<br>fn({“a”:”1”,”b”:”2”})</p>
+<p>jQuery封装的Ajax已经封装好了jsonp格式的,当然底层的实现方法就是上面所说的动态地添加script标签.</p>
+<p>只需要设置几个相关参数,callback参数可以不填,会动态生成一个</p>
+<pre><code>dataType:&quot;jsonp&quot;,
+jsonp:&quot;&quot;,
+callback:&quot;&quot;
+</code></pre><h2 id="artTemplate"><a href="#artTemplate" class="headerlink" title="artTemplate"></a>artTemplate</h2><p><a href="https://github.com/aui/artTemplate" target="_blank" rel="external">artTemplate的github文档</a></p>
+<p>这个链接里说的很详细,忘记的时候可以随时查,也没必要死记硬背格式</p>
+<h2 id="一个模仿百度首页的例子"><a href="#一个模仿百度首页的例子" class="headerlink" title="一个模仿百度首页的例子"></a>一个模仿百度首页的例子</h2><p>实现了根据键盘录入实现搜索文本框的功能,利用了jQuery的Ajax封装和artTemplate模版,代码量大大减少.</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+    &lt;style&gt;
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+        #contents {
+            margin: 100px auto;
+            width: 500px;
+        }
+        #txt {
+            width: 400px;
+        }
+        #datas {
+            border: 1px #ccc solid;
+            width: 400px;
+        }
+        #datas ul {
+            list-style-type: none;
+        }
+    &lt;/style&gt;
+    &lt;script src=&quot;js/jquery-2.2.0.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;js/template-native-debug.js&quot;&gt;&lt;/script&gt;
+    &lt;script id=&quot;tpl&quot; type=&quot;text/html&quot;&gt;
+        &lt;div id=&quot;datas&quot;&gt;
+            &lt;ul&gt;
+                &lt;% for(var i=0; i&lt; s.length; i++) { %&gt;
+                &lt;li&gt;&lt;%= s[i] %&gt;&lt;/li&gt;
+                &lt;% } %&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    &lt;/script&gt;
+    &lt;script&gt;
+        $(function () {
+            $(&quot;#txt&quot;).keyup(function () {
+                //
+                var key = $(&quot;#txt&quot;).val();
+                //发送异步请求获取数据
+                $.ajax({
+                    type:&quot;get&quot;,
+                    url:&quot;https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=&quot;+key,
+                    dataType:&quot;jsonp&quot;,
+                    jsonp:&quot;cb&quot;,
+                    success: function (data) {
+                        $(&quot;#datas&quot;).remove();
+
+                        if (data.s.length &gt; 0) {
+                            var html = template(&quot;tpl&quot;,data);
+                            $(&quot;#contents&quot;).append(html);
+                        }
+
+                    },
+                    error: function () {
+                        alert(&quot;出错了&quot;);
+                    }
+                })
+            });
+        })
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id=&quot;contents&quot;&gt;
+        &lt;input type=&quot;text&quot; name=&quot;&quot; id=&quot;txt&quot;&gt;
+        &lt;input type=&quot;button&quot; value=&quot;搜索&quot; id=&quot;btn&quot;&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p><img src="http://i4.buimg.com/567571/aa960010b80ffd66.png" alt=""><br><img src="http://i4.buimg.com/567571/d5f5c0a0f9c2c2a2.png" alt=""></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/10/Hexo-NexT主题/" rel="next" title="Hexo-NexT主题">
+                <i class="fa fa-chevron-left"></i> Hexo-NexT主题
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/06/Ajax相关/"
+           data-title="Ajax相关" data-url="http://yoursite.com/2016/09/06/Ajax相关/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww4.sinaimg.cn/mw690/719c39c3gw1f4jhs5r30dj206o06o74c.jpg"
+               alt="李普阳" />
+          <p class="site-author-name" itemprop="name">李普阳</p>
+          <p class="site-description motion-element" itemprop="description">一个人的命运啊，当然要靠自我奋斗。但是，也要考虑到历史的行程。（手动滑稽</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/p/1005053917294273/home?from=page_100505&mod=TAB&is_all=1#place" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery封装的Ajax"><span class="nav-number">1.</span> <span class="nav-text">jQuery封装的Ajax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jsonp"><span class="nav-number">2.</span> <span class="nav-text">jsonp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#artTemplate"><span class="nav-number">3.</span> <span class="nav-text">artTemplate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个模仿百度首页的例子"><span class="nav-number">4.</span> <span class="nav-text">一个模仿百度首页的例子</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李普阳</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"pangzili"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
