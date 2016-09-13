@@ -84,20 +84,19 @@
 
 
 
-<meta name="description" content="经过半个月的乱操作，基本熟悉了Hexo+GitHub Pages搭一个博客的基本方法，不过还有几个坑没解决，慢慢来吧。">
+<meta name="description" content="刚接触bootstrap,还在学习bootstrap的简单使用方法,看看它的效果,以后还要看源码,听老司机说一般公司里是不会直接使用bootstrap的,所以还是主要看这个库的设计理念吧.
+跟着资料模仿了个简单的网页,放在了github里,下面是三天里遇到的一些问题和解决方法,整理一下加深一下印象.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo-NexT主题">
-<meta property="og:url" content="http://yoursite.com/2016/07/10/Hexo-NexT主题/index.html">
+<meta property="og:title" content="bootstrap库简单使用中遇到的一些问题">
+<meta property="og:url" content="http://yoursite.com/2016/09/11/bootstrap/index.html">
 <meta property="og:site_name" content="胖子李">
-<meta property="og:description" content="经过半个月的乱操作，基本熟悉了Hexo+GitHub Pages搭一个博客的基本方法，不过还有几个坑没解决，慢慢来吧。">
-<meta property="og:image" content="http://ww3.sinaimg.cn/large/74311666jw1f5o4tmmf7qj20ej0420tl.jpg">
-<meta property="og:image" content="http://i4.piimg.com/567571/e3b2cd48ba356204.png">
-<meta property="og:image" content="http://i1.piimg.com/567571/2f9e0903cfbeed39.png">
-<meta property="og:updated_time" content="2016-07-09T17:15:41.739Z">
+<meta property="og:description" content="刚接触bootstrap,还在学习bootstrap的简单使用方法,看看它的效果,以后还要看源码,听老司机说一般公司里是不会直接使用bootstrap的,所以还是主要看这个库的设计理念吧.
+跟着资料模仿了个简单的网页,放在了github里,下面是三天里遇到的一些问题和解决方法,整理一下加深一下印象.">
+<meta property="og:updated_time" content="2016-09-13T13:39:09.511Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo-NexT主题">
-<meta name="twitter:description" content="经过半个月的乱操作，基本熟悉了Hexo+GitHub Pages搭一个博客的基本方法，不过还有几个坑没解决，慢慢来吧。">
-<meta name="twitter:image" content="http://ww3.sinaimg.cn/large/74311666jw1f5o4tmmf7qj20ej0420tl.jpg">
+<meta name="twitter:title" content="bootstrap库简单使用中遇到的一些问题">
+<meta name="twitter:description" content="刚接触bootstrap,还在学习bootstrap的简单使用方法,看看它的效果,以后还要看源码,听老司机说一般公司里是不会直接使用bootstrap的,所以还是主要看这个库的设计理念吧.
+跟着资料模仿了个简单的网页,放在了github里,下面是三天里遇到的一些问题和解决方法,整理一下加深一下印象.">
 
 
 
@@ -118,9 +117,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/07/10/Hexo-NexT主题/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/09/11/bootstrap/"/>
 
-  <title> Hexo-NexT主题 | 胖子李 </title>
+  <title> bootstrap库简单使用中遇到的一些问题 | 胖子李 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -240,7 +239,7 @@
             
             
               
-                Hexo-NexT主题
+                bootstrap库简单使用中遇到的一些问题
               
             
           </h1>
@@ -252,8 +251,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-10T00:35:05+08:00" content="2016-07-10">
-              2016-07-10
+            <time itemprop="dateCreated" datetime="2016-09-11T00:00:00+08:00" content="2016-09-11">
+              2016-09-11
             </time>
           </span>
 
@@ -263,8 +262,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/07/10/Hexo-NexT主题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/10/Hexo-NexT主题/" itemprop="commentsCount"></span>
+                <a href="/2016/09/11/bootstrap/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/11/bootstrap/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -292,22 +291,50 @@
       
 
       
-        <p>经过半个月的乱操作，基本熟悉了Hexo+GitHub Pages搭一个博客的基本方法，不过还有几个坑没解决，慢慢来吧。</p>
+        <p>刚接触bootstrap,还在学习bootstrap的简单使用方法,看看它的效果,以后还要看源码,听老司机说一般公司里是不会直接使用bootstrap的,所以还是主要看这个库的设计理念吧.</p>
+<p>跟着资料模仿了个简单的网页,放在了github里,下面是三天里遇到的一些问题和解决方法,整理一下加深一下印象.</p>
 <a id="more"></a>
-<h3 id="主页不要显示全文，只显示摘要的方法"><a href="#主页不要显示全文，只显示摘要的方法" class="headerlink" title="主页不要显示全文，只显示摘要的方法"></a>主页不要显示全文，只显示摘要的方法</h3><p>由于Hexo本身支持Markdown语法，所以可以用&lt;!– more –&gt;的一句指令，像这样：</p>
-<p><img src="http://ww3.sinaimg.cn/large/74311666jw1f5o4tmmf7qj20ej0420tl.jpg" alt=""></p>
-<p>效果：</p>
-<p><img src="http://i4.piimg.com/567571/e3b2cd48ba356204.png" alt=""></p>
-<h3 id="阅读次数统计"><a href="#阅读次数统计" class="headerlink" title="阅读次数统计"></a>阅读次数统计</h3><p>由于GitHub Pages是静态的，例如动态的功能，如评论，阅读计数必须依赖第三方平台，像集成了很多平台的多说，还有百度统计，leanCloud等，我一直想用的leanCloud应该是从16年5月1之后就被和谐掉了，一直在审核我的资料，但也一直没有回应，所以阅读次数这个功能还没法实现。</p>
-<p>后来发现NexT已经集成了不蒜子的统计功能没在主题的配置文件_config.yml中配置就好了</p>
-<p><img src="http://i1.piimg.com/567571/2f9e0903cfbeed39.png" alt=""></p>
-<h3 id="NexT的三个主题"><a href="#NexT的三个主题" class="headerlink" title="NexT的三个主题"></a>NexT的三个主题</h3><p>Muse、Mist、Pisces三个中最后选了Mist，感觉还是可以的。</p>
-<p>下面是官方文档中对三种主题的简述：</p>
-<ul>
-<li>Muse - 默认 Scheme，这是 NexT 最初的版本，黑白主调，大量留白</li>
-<li>Mist - Muse 的紧凑版本，整洁有序的单栏外观</li>
-<li>Pisces - 双栏 Scheme，小家碧玉似的清新</li>
-</ul>
+<p>第一天</p>
+<p>1 当页面缩小到手机端的时候,会出现不在同一行(brand在一行,nav在下一行)<br>    原因是字号设置为18px 改为16px就好了</p>
+<p>2 本来brand的宽度我设为了300px,导致整个一行放不开了,brand自成一行.</p>
+<p>3 设置导航栏hover状态的border-bottom的红色线条时,可以用浏览器的hover自带功能,然后拷贝粘贴代码带sublime中</p>
+<p>4 响应式布局可以直接调用bootstrap的hidden-xxx类,或者visible-xxx类(visible可以设置display的属性)eg:visible-xxx-block</p>
+<p>5 手机端的那个按钮(汉堡菜单),可以直接调用组件</p>
+<pre><code>&lt;div class=&quot;navbar-header&quot;&gt;
+   &lt;button type=&quot;button&quot; class=&quot;navbar-toggle collapsed&quot; data-toggle=&quot;collapse&quot; data-target=&quot;#bs-example-navbar-collapse-1&quot; aria-expanded=&quot;false&quot;&gt;
+    &lt;span class=&quot;sr-only&quot;&gt;切换菜单&lt;/span&gt;
+    &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+    &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+    &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+  &lt;div class=&quot;collapse navbar-collapse&quot; id=&quot;bs-example-navbar-collapse-1&quot;&gt;
+      &lt;ul class=&quot;nav navbar-nav&quot;&gt;
+      &lt;/ul&gt;
+  &lt;/div&gt;
+</code></pre><p>6 viewport 主要是移动端的时候有用,保持缩放 字体大小等设置 一般格式如下</p>
+<pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, user-scalable=no&quot;&gt;
+</code></pre><p>7 版本判断 如果是低版本浏览器则引入html5shiv和respond的js文件</p>
+<pre><code>&lt;!--[if lt IE 9]&gt;
+  &lt;script src=&quot;lib/html5shiv/html5shiv.min.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;lib/respond/respond.min.js&quot;&gt;&lt;/script&gt;
+&lt;![endif]--&gt;
+</code></pre><p>8 如果设置头部nav的高度,在手机端点击汉堡按钮的时候会出现bug,广告轮播栏不会弹下去给汉堡栏让空.<br>不要设置nav的高度</p>
+<p>第二天</p>
+<p>1 轮播图如果用原生的bootstrap,随着屏幕的缩小,图片会跟着缩小,效果不好,而且图片本来的宽高与它的父盒子的宽高不一致<br>这时可以把图片设置为div的bgi ,然后设置</p>
+<pre><code>#main_ad .carousel-inner .item {
+  height: 410px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+</code></pre><p>这样图片随着屏幕变小,会一直在正中心而且高度不会变.</p>
+<p>2 一定要分清data和date啊<br>each取出的item是DOM,要换成jQuery</p>
+<p>第三天</p>
+<p>1 设置横向滚动条 用js,在ul外设置一个ulwrapper,设置ulwrapper有一个横向滚动条,并且动态利用js设置ul的宽度,要设一个初始宽度为40或者50,因为有一个padding-left</p>
+<p>2 设置tooltips,利用bootstrap插件,要注意,如果下面一个是div,那么会出现问题,不会在上面弹出,只会在右边弹出</p>
+<p>3 在设置移动端轮播图左右滑动时,touchend没法获得clientX,要利用touchmove来获得endX,在touchend时再比大小,触发轮播图的carousel方法(“next”/“prev”)<br>最好有个阈值来限定最小移动的像素,否则体验相当差</p>
 
       
     </div>
@@ -332,17 +359,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/06/27/LeetCode题解/" rel="next" title="LeetCode题解">
-                <i class="fa fa-chevron-left"></i> LeetCode题解
+              <a href="/2016/09/06/Ajax相关/" rel="next" title="Ajax相关">
+                <i class="fa fa-chevron-left"></i> Ajax相关
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/06/Ajax相关/" rel="prev" title="Ajax相关">
-                Ajax相关 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -368,8 +391,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/07/10/Hexo-NexT主题/"
-           data-title="Hexo-NexT主题" data-url="http://yoursite.com/2016/07/10/Hexo-NexT主题/">
+      <div class="ds-thread" data-thread-key="2016/09/11/bootstrap/"
+           data-title="bootstrap库简单使用中遇到的一些问题" data-url="http://yoursite.com/2016/09/11/bootstrap/">
       </div>
     
   </div>
@@ -457,7 +480,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#主页不要显示全文，只显示摘要的方法"><span class="nav-number">1.</span> <span class="nav-text">主页不要显示全文，只显示摘要的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阅读次数统计"><span class="nav-number">2.</span> <span class="nav-text">阅读次数统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NexT的三个主题"><span class="nav-number">3.</span> <span class="nav-text">NexT的三个主题</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>
