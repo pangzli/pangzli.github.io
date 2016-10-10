@@ -91,7 +91,8 @@
 <meta property="og:site_name" content="胖子李">
 <meta property="og:description" content="使用github中遇到的一些问题">
 <meta property="og:image" content="http://p1.bpimg.com/567571/18c03184961906f1.png">
-<meta property="og:updated_time" content="2016-10-09T03:52:42.750Z">
+<meta property="og:image" content="http://p1.bpimg.com/567571/c807560dd609928c.png">
+<meta property="og:updated_time" content="2016-10-10T15:31:23.993Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git使用中出现的问题">
 <meta name="twitter:description" content="使用github中遇到的一些问题">
@@ -306,6 +307,12 @@
 <p>出现这个问题有可能是你在初始化仓库的时候初始了READEME.md,而在本地仓库没有这个文件,所以可以用下面的代码来解决</p>
 <p>可以通过如下命令进行代码合并【注：pull=fetch+merge]</p>
 <pre><code>git pull --rebase origin master
+</code></pre><h3 id="fatal-remote-origin-already-exists"><a href="#fatal-remote-origin-already-exists" class="headerlink" title="fatal: remote origin already exists."></a>fatal: remote origin already exists.</h3><blockquote>
+<p><img src="http://p1.bpimg.com/567571/c807560dd609928c.png" alt=""></p>
+</blockquote>
+<p>出现这个问题是github远程服务器已经存在了这个仓库,可以通过下面的方法解决</p>
+<pre><code>先输入$ git remote rm origin
+再输入$ git remote add origin http://....
 </code></pre>
       
     </div>
@@ -451,7 +458,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一般的上传过程"><span class="nav-number">1.</span> <span class="nav-text">一般的上传过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有的时候会遇到一些问题"><span class="nav-number">2.</span> <span class="nav-text">有的时候会遇到一些问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#failed-to-push-some-refs-to-git"><span class="nav-number">2.1.</span> <span class="nav-text">failed to push some refs to git</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一般的上传过程"><span class="nav-number">1.</span> <span class="nav-text">一般的上传过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有的时候会遇到一些问题"><span class="nav-number">2.</span> <span class="nav-text">有的时候会遇到一些问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#failed-to-push-some-refs-to-git"><span class="nav-number">2.1.</span> <span class="nav-text">failed to push some refs to git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fatal-remote-origin-already-exists"><span class="nav-number">2.2.</span> <span class="nav-text">fatal: remote origin already exists.</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
