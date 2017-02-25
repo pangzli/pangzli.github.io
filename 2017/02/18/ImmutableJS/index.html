@@ -84,20 +84,16 @@
 
 
 
-<meta name="description" content="经过半个月的乱操作，基本熟悉了Hexo+GitHub Pages搭一个博客的基本方法，不过还有几个坑没解决，慢慢来吧。">
+<meta name="description" content="Immutable 是一旦创建，就不能再被更改的数据。对 Immutable 对象的任何修改或添加删除操作都会返回一个新的 Immutable 对象。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo-NexT主题">
-<meta property="og:url" content="http://yoursite.com/2016/07/10/Hexo-NexT主题/index.html">
+<meta property="og:title" content="Immutable">
+<meta property="og:url" content="http://yoursite.com/2017/02/18/ImmutableJS/index.html">
 <meta property="og:site_name" content="胖子李">
-<meta property="og:description" content="经过半个月的乱操作，基本熟悉了Hexo+GitHub Pages搭一个博客的基本方法，不过还有几个坑没解决，慢慢来吧。">
-<meta property="og:image" content="http://ww3.sinaimg.cn/large/74311666jw1f5o4tmmf7qj20ej0420tl.jpg">
-<meta property="og:image" content="http://i4.piimg.com/567571/e3b2cd48ba356204.png">
-<meta property="og:image" content="http://i1.piimg.com/567571/2f9e0903cfbeed39.png">
-<meta property="og:updated_time" content="2016-07-09T17:15:42.000Z">
+<meta property="og:description" content="Immutable 是一旦创建，就不能再被更改的数据。对 Immutable 对象的任何修改或添加删除操作都会返回一个新的 Immutable 对象。">
+<meta property="og:updated_time" content="2017-02-25T11:59:53.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo-NexT主题">
-<meta name="twitter:description" content="经过半个月的乱操作，基本熟悉了Hexo+GitHub Pages搭一个博客的基本方法，不过还有几个坑没解决，慢慢来吧。">
-<meta name="twitter:image" content="http://ww3.sinaimg.cn/large/74311666jw1f5o4tmmf7qj20ej0420tl.jpg">
+<meta name="twitter:title" content="Immutable">
+<meta name="twitter:description" content="Immutable 是一旦创建，就不能再被更改的数据。对 Immutable 对象的任何修改或添加删除操作都会返回一个新的 Immutable 对象。">
 
 
 
@@ -118,9 +114,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/07/10/Hexo-NexT主题/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/02/18/ImmutableJS/"/>
 
-  <title> Hexo-NexT主题 | 胖子李 </title>
+  <title> Immutable | 胖子李 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -240,7 +236,7 @@
             
             
               
-                Hexo-NexT主题
+                Immutable
               
             
           </h1>
@@ -252,8 +248,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-10T00:35:05+08:00" content="2016-07-10">
-              2016-07-10
+            <time itemprop="dateCreated" datetime="2017-02-18T00:35:05+08:00" content="2017-02-18">
+              2017-02-18
             </time>
           </span>
 
@@ -263,8 +259,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/07/10/Hexo-NexT主题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/10/Hexo-NexT主题/" itemprop="commentsCount"></span>
+                <a href="/2017/02/18/ImmutableJS/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/18/ImmutableJS/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -292,22 +288,90 @@
       
 
       
-        <p>经过半个月的乱操作，基本熟悉了Hexo+GitHub Pages搭一个博客的基本方法，不过还有几个坑没解决，慢慢来吧。</p>
+        <p>Immutable 是一旦创建，就不能再被更改的数据。对 Immutable 对象的任何修改或添加删除操作都会返回一个新的 Immutable 对象。 </p>
 <a id="more"></a>
-<h3 id="主页不要显示全文，只显示摘要的方法"><a href="#主页不要显示全文，只显示摘要的方法" class="headerlink" title="主页不要显示全文，只显示摘要的方法"></a>主页不要显示全文，只显示摘要的方法</h3><p>由于Hexo本身支持Markdown语法，所以可以用&lt;!– more –&gt;的一句指令，像这样：</p>
-<p><img src="http://ww3.sinaimg.cn/large/74311666jw1f5o4tmmf7qj20ej0420tl.jpg" alt=""></p>
-<p>效果：</p>
-<p><img src="http://i4.piimg.com/567571/e3b2cd48ba356204.png" alt=""></p>
-<h3 id="阅读次数统计"><a href="#阅读次数统计" class="headerlink" title="阅读次数统计"></a>阅读次数统计</h3><p>由于GitHub Pages是静态的，例如动态的功能，如评论，阅读计数必须依赖第三方平台，像集成了很多平台的多说，还有百度统计，leanCloud等，我一直想用的leanCloud应该是从16年5月1之后就被和谐掉了，一直在审核我的资料，但也一直没有回应，所以阅读次数这个功能还没法实现。</p>
-<p>后来发现NexT已经集成了不蒜子的统计功能没在主题的配置文件_config.yml中配置就好了</p>
-<p><img src="http://i1.piimg.com/567571/2f9e0903cfbeed39.png" alt=""></p>
-<h3 id="NexT的三个主题"><a href="#NexT的三个主题" class="headerlink" title="NexT的三个主题"></a>NexT的三个主题</h3><p>Muse、Mist、Pisces三个中最后选了Mist，感觉还是可以的。</p>
-<p>下面是官方文档中对三种主题的简述：</p>
-<ul>
-<li>Muse - 默认 Scheme，这是 NexT 最初的版本，黑白主调，大量留白</li>
-<li>Mist - Muse 的紧凑版本，整洁有序的单栏外观</li>
-<li>Pisces - 双栏 Scheme，小家碧玉似的清新</li>
-</ul>
+<h3 id="什么是-Immutable？"><a href="#什么是-Immutable？" class="headerlink" title="什么是 Immutable？"></a>什么是 Immutable？</h3><p>Immutable 是一旦创建，就不能再被更改的数据。对 Immutable 对象的任何修改或添加删除操作都会返回一个新的 Immutable 对象。 </p>
+<h3 id="初识："><a href="#初识：" class="headerlink" title="初识："></a>初识：</h3><p>让我们看下面一段代码：</p>
+<pre><code>function keyLog(touchFn) {
+  let data = { key: &apos;value&apos; };
+  f(data);
+  console.log(data.key); // 猜猜会打印什么？
+}
+</code></pre><p>不查看f，不知道它对 data 做了什么，无法确认会打印什么。但如果 data 是 Immutable，你可以确定打印的是 value：</p>
+<pre><code>function keyLog(touchFn) {
+  let data = Immutable.Map({ key: &apos;value&apos; });
+  f(data);
+  console.log(data.get(&apos;key&apos;));  // value
+}
+</code></pre><p>JavaScript 中的Object与Array等使用的是引用赋值，新的对象简单的引用了原始对象，改变新也将影响旧的：</p>
+<pre><code>foo = {a: 1};  bar = foo;  bar.a = 2;
+foo.a // 2
+</code></pre><p>虽然这样做可以节约内存，但当应用复杂后，造成了状态不可控，是很大的隐患，节约的内存优点变得得不偿失。</p>
+<p>Immutable则不一样，相应的：</p>
+<pre><code>foo = Immutable.Map({ a: 1 }); 
+bar = foo.set(&apos;a&apos;, 2);
+foo.get(&apos;a&apos;) // 1
+</code></pre><h3 id="reducer和Immutable的结合："><a href="#reducer和Immutable的结合：" class="headerlink" title="reducer和Immutable的结合："></a>reducer和Immutable的结合：</h3><p>在Redux中，它的最优做法是每个reducer都返回一个新的对象（数组），所以我们常常会看到这样的代码：</p>
+<pre><code>// reducer
+...
+return [
+   ...oldArr.slice(0, 3),
+   newValue,
+   ...oldArr.slice(4)
+];
+</code></pre><p>为了返回新的对象（数组），不得不有上面奇怪的样子，而在使用更深的数据结构时会变的更棘手。 让我们看看Immutable的做法：</p>
+<pre><code>// reducer
+...
+return oldArr.set(4, newValue);
+</code></pre><p>是不是很简洁？ </p>
+<h3 id="关于-“-”："><a href="#关于-“-”：" class="headerlink" title="关于 “===”："></a>关于 “===”：</h3><p>我们知道对于Object与Array的===比较，是对引用地址的比较而不是“值比较”，如：</p>
+<pre><code>{a:1, b:2, c:3} === {a:1, b:2, c:3}; // false
+[1, 2, [3, 4]] === [1, 2, [3, 4]]; // false
+</code></pre><p>对于上面只能采用 deepCopy、deepCompare来遍历比较，不仅麻烦且好性能。</p>
+<p>我们感受来一下Immutable的做法！</p>
+<pre><code>map1 = Immutable.Map({a:1, b:2, c:3});
+map2 = Immutable.Map({a:1, b:2, c:3});
+Immutable.is(map1, map2); // true
+
+// List1 = Immutable.List([1, 2, Immutable.List[3, 4]]);
+List1 = Immutable.fromJS([1, 2, [3, 4]]);
+List2 = Immutable.fromJS([1, 2, [3, 4]]);
+Immutable.is(List1, List2); // true
+</code></pre><h3 id="Immutable的相关API"><a href="#Immutable的相关API" class="headerlink" title="Immutable的相关API"></a>Immutable的相关API</h3><p><a href="">http://facebook.github.io/immutable-js/docs/#/</a></p>
+<h3 id="React性能优化"><a href="#React性能优化" class="headerlink" title="React性能优化"></a>React性能优化</h3><p>React 做性能优化时有一个大招，就是使用 shouldComponentUpdate()，但它默认返回 true，即始终会执行 render() 方法，后面做 Virtual DOM 比较。</p>
+<p>在使用原生属性时，为了得出shouldComponentUpdate正确的true or false，不得不用deepCopy、deepCompare来算出答案，消耗的性能很不划算。而在有了Immutable之后，使用上面的方法对深层结构的比较就变的易如反掌。</p>
+<h3 id="如何在Redux中使用Immutable"><a href="#如何在Redux中使用Immutable" class="headerlink" title="如何在Redux中使用Immutable"></a>如何在Redux中使用Immutable</h3><p>目标：<strong>将state -&gt; Immutable化</strong>。</p>
+<p>关键的库：<a href="">https://github.com/gajus/redux-immutable</a>将原来 Redux提供的combineReducers改由上面的库提供：</p>
+<pre><code>// rootReduers.js
+// import { combineReducers } from &apos;redux&apos;; // 旧的方法
+import { combineReducers } from &apos;redux-immutable&apos;; // 新的方法
+
+import prop1 from &apos;./prop1&apos;;
+import prop2 from &apos;./prop2&apos;;
+import prop3 from &apos;./prop3&apos;;
+
+const rootReducer = combineReducers({
+  prop1, prop2, prop3,
+});
+
+
+// store.js
+// 创建store的方法和常规一样
+import { createStore } from &apos;redux&apos;;
+import rootReducer from &apos;./reducers&apos;;
+
+const store = createStore(rootReducer);
+export default store;
+通过新的combineReducers将把store对象转化成Immutable，在container中使用时也会略有不同（但这正是我们想要的）：
+
+const mapStateToProps = (state) =&gt; ({
+  prop1: state.get(&apos;prop1&apos;),
+  prop2: state.get(&apos;prop2&apos;),
+  prop3: state.get(&apos;prop3&apos;),
+  next: state.get(&apos;next&apos;),
+});
+export default connect(mapStateToProps)(App);
+</code></pre><h3 id="Immutable相关文章："><a href="#Immutable相关文章：" class="headerlink" title="Immutable相关文章："></a>Immutable相关文章：</h3><p><a href="https://github.com/camsong/blog/issues/3" target="_blank" rel="external">Immutable 详解及 React 中实践</a></p>
 
       
     </div>
@@ -332,17 +396,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/06/27/LeetCode题解/" rel="next" title="LeetCode题解">
-                <i class="fa fa-chevron-left"></i> LeetCode题解
+              <a href="/2016/10/09/git/" rel="next" title="git使用中出现的问题">
+                <i class="fa fa-chevron-left"></i> git使用中出现的问题
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/06/Ajax相关/" rel="prev" title="Ajax相关">
-                Ajax相关 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -368,8 +428,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/07/10/Hexo-NexT主题/"
-           data-title="Hexo-NexT主题" data-url="http://yoursite.com/2016/07/10/Hexo-NexT主题/">
+      <div class="ds-thread" data-thread-key="2017/02/18/ImmutableJS/"
+           data-title="Immutable" data-url="http://yoursite.com/2017/02/18/ImmutableJS/">
       </div>
     
   </div>
@@ -457,7 +517,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#主页不要显示全文，只显示摘要的方法"><span class="nav-number">1.</span> <span class="nav-text">主页不要显示全文，只显示摘要的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阅读次数统计"><span class="nav-number">2.</span> <span class="nav-text">阅读次数统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NexT的三个主题"><span class="nav-number">3.</span> <span class="nav-text">NexT的三个主题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-Immutable？"><span class="nav-number">1.</span> <span class="nav-text">什么是 Immutable？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初识："><span class="nav-number">2.</span> <span class="nav-text">初识：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reducer和Immutable的结合："><span class="nav-number">3.</span> <span class="nav-text">reducer和Immutable的结合：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于-“-”："><span class="nav-number">4.</span> <span class="nav-text">关于 “===”：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Immutable的相关API"><span class="nav-number">5.</span> <span class="nav-text">Immutable的相关API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React性能优化"><span class="nav-number">6.</span> <span class="nav-text">React性能优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何在Redux中使用Immutable"><span class="nav-number">7.</span> <span class="nav-text">如何在Redux中使用Immutable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Immutable相关文章："><span class="nav-number">8.</span> <span class="nav-text">Immutable相关文章：</span></a></li></ol></div>
             
           </div>
         </section>
