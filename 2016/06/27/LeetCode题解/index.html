@@ -90,10 +90,12 @@
 <meta property="og:url" content="http://yoursite.com/2016/06/27/LeetCode题解/index.html">
 <meta property="og:site_name" content="胖子李">
 <meta property="og:description" content="开了个大坑，慢慢来，顺序是按Acceptance从大到小排序，等我全部做完以后再按类型分类，一天做两三个估计得三四个月（233">
-<meta property="og:updated_time" content="2017-02-26T13:32:58.000Z">
+<meta property="og:image" content="https://leetcode.com/static/images/problemset/island.png">
+<meta property="og:updated_time" content="2017-02-26T15:55:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode题解">
 <meta name="twitter:description" content="开了个大坑，慢慢来，顺序是按Acceptance从大到小排序，等我全部做完以后再按类型分类，一天做两三个估计得三四个月（233">
+<meta name="twitter:image" content="https://leetcode.com/static/images/problemset/island.png">
 
 
 
@@ -1323,6 +1325,179 @@ public:
         return n1;
     }
 };
+</code></pre><h2 id="Number-Complement"><a href="#Number-Complement" class="headerlink" title="Number Complement"></a>Number Complement</h2><p>Given a positive integer, output its complement number. The complement strategy is to flip the bits of its binary representation.</p>
+<p>Note:</p>
+<ol>
+<li>The given integer is guaranteed to fit within the range of a 32-bit signed integer.</li>
+<li>You could assume no leading zero bit in the integer’s binary representation.</li>
+</ol>
+<p>Example 1:</p>
+<pre><code>Input: 5
+Output: 2
+Explanation: The binary representation of 5 is 101 (no leading zero bits), and its complement is 010. So you need to output 2.
+</code></pre><p>Example 2:</p>
+<pre><code>Input: 1
+Output: 0
+Explanation: The binary representation of 1 is 1 (no leading zero bits), and its complement is 0. So you need to output 0.
+
+class Solution {
+public:
+    int findComplement(int num) {
+        int a[32] = {0};
+        int n = 0;
+        int res = 0;
+        for(int i=0; i&lt;32&amp;&amp;num!=0; i++){
+            a[i] = num%2;
+            num /= 2;
+            n++;
+        }
+
+        for(int i=0; i&lt;n; i++){
+            a[i] = !a[i];
+        }
+
+        for(int i=0; i&lt;n; i++){
+            res = res + a[i]*pow(2,i);
+        }
+        return res;
+    }
+};
+
+利用一个数组保存每位，取反后再算成结果。
+</code></pre><h2 id="Max-Consecutive-Ones"><a href="#Max-Consecutive-Ones" class="headerlink" title="Max Consecutive Ones"></a>Max Consecutive Ones</h2><p>Given a binary array, find the maximum number of consecutive 1s in this array.</p>
+<p>Example 1:</p>
+<pre><code>Input: [1,1,0,1,1,1]
+Output: 3
+Explanation: The first two digits or the last three digits are consecutive 1s.
+    The maximum number of consecutive 1s is 3.
+</code></pre><p>Note:</p>
+<p>The input array will only contain 0 and 1.</p>
+<p>The length of input array is a positive integer and will not exceed 10,000</p>
+<pre><code>class Solution {
+public:
+    int findMaxConsecutiveOnes(vector&lt;int&gt;&amp; nums) {
+        int res = 0;
+        int maxT = 0;
+        for(int i=0; i&lt;nums.size(); i++){
+            if(nums[i]==1){
+                maxT++;
+                res = max(res, maxT);
+            }else{
+                maxT = 0;
+            }
+        }
+        return res;
+    }
+};
+</code></pre><h2 id="Island-Perimeter"><a href="#Island-Perimeter" class="headerlink" title="Island Perimeter"></a>Island Perimeter</h2><p>ou are given a map in form of a two-dimensional integer grid where 1 represents land and 0 represents water. Grid cells are connected horizontally/vertically (not diagonally). The grid is completely surrounded by water, and there is exactly one island (i.e., one or more connected land cells). The island doesn’t have “lakes” (water inside that isn’t connected to the water around the island). One cell is a square with side length 1. The grid is rectangular, width and height don’t exceed 100. Determine the perimeter of the island.</p>
+<p>Example:</p>
+<pre><code>[[0,1,0,0],
+ [1,1,1,0],
+ [0,1,0,0],
+ [1,1,0,0]]
+
+Answer: 16
+Explanation: The perimeter is the 16 yellow stripes in the image below:
+</code></pre><p><img src="https://leetcode.com/static/images/problemset/island.png" alt=""></p>
+<pre><code>class Solution {
+public:
+    int islandPerimeter(vector&lt;vector&lt;int&gt;&gt;&amp; grid) {
+        int islandNum = 0, linkNum = 0;
+        for(int i=0; i&lt;grid.size(); i++){
+            for(int j=0; j&lt;grid[i].size(); j++){
+                if(grid[i][j]==1){
+                    islandNum ++;
+                }
+                if(j&gt;=1 &amp;&amp; grid[i][j]==1 &amp;&amp; grid[i][j-1]==1){
+                    linkNum ++;
+                }
+                if(i&gt;=1 &amp;&amp; grid[i][j]==1 &amp;&amp; grid[i-1][j]==1){
+                    linkNum ++;
+                }
+            }
+        }
+
+        return islandNum * 4 - linkNum * 2;
+    }
+};
+</code></pre><p>先找到规律再写算法。</p>
+<h2 id="Find-All-Numbers-Disappeared-in-an-Array"><a href="#Find-All-Numbers-Disappeared-in-an-Array" class="headerlink" title="Find All Numbers Disappeared in an Array"></a>Find All Numbers Disappeared in an Array</h2><p>Given an array of integers where 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.</p>
+<p>Find all the elements of [1, n] inclusive that do not appear in this array.</p>
+<p>Could you do it without extra space and in O(n) runtime? You may assume the returned list does not count as extra space.</p>
+<p>Example:</p>
+<pre><code>Input:
+[4,3,2,7,8,2,3,1]
+
+Output:
+[5,6]
+</code></pre><p>代码实现：</p>
+<pre><code>class Solution {
+public:
+    vector&lt;int&gt; findDisappearedNumbers(vector&lt;int&gt;&amp; nums) {
+        int n = nums.size();
+        vector&lt;bool&gt; hash(n, false);
+
+        for(int i=0; i&lt;n; i++){
+            hash[nums[i]-1] = true;
+        }
+
+        vector&lt;int&gt; res;
+        for(int i=0; i&lt;n; i++){
+            if(hash[i]==0){
+                res.push_back(i+1);
+            }
+        }
+
+        return res;
+    }
+};
+</code></pre><h2 id="Construct-the-Rectangle"><a href="#Construct-the-Rectangle" class="headerlink" title="Construct the Rectangle"></a>Construct the Rectangle</h2><p>For a web developer, it is very important to know how to design a web page’s size. So, given a specific rectangular web page’s area, your job by now is to design a rectangular web page, whose length L and width W satisfy the following requirements:</p>
+<pre><code>1. The area of the rectangular web page you designed must equal to the given target area.
+
+2. The width W should not be larger than the length L, which means L &gt;= W.
+
+3. The difference between length L and width W should be as small as possible.
+</code></pre><p>You need to output the length L and the width W of the web page you designed in sequence.<br>Example:</p>
+<pre><code>Input: 4
+Output: [2, 2]
+Explanation: The target area is 4, and all the possible ways to construct it are [1,4], [2,2], [4,1]. 
+But according to requirement 2, [1,4] is illegal; according to requirement 3,  [4,1] is not optimal compared to [2,2]. So the length L is 2, and the width W is 2.
+</code></pre><p>Note:</p>
+<pre><code>* The given area won&apos;t exceed 10,000,000 and is a positive integer
+* The web page&apos;s width and length you designed must be positive integers.
+</code></pre><p>代码实现：</p>
+<pre><code>class Solution {
+public:
+    vector&lt;int&gt; constructRectangle(int area) {
+        int w,l;
+        vector&lt;int&gt; res;
+        for(int i=sqrt(area); i&lt;=area; i++){
+            l = i;
+            w = area / l;
+
+            if(l*w == area &amp;&amp; l&gt;=w){
+                res.push_back(l);
+                res.push_back(w);
+                break;
+            }
+        }
+
+        return res;
+    }
+};
+</code></pre><h2 id="Find-the-Difference"><a href="#Find-the-Difference" class="headerlink" title="Find the Difference"></a>Find the Difference</h2><p>Given two strings s and t which consist of only lowercase letters.</p>
+<p>String t is generated by random shuffling string s and then add one more letter at a random position.</p>
+<p>Find the letter that was added in t.</p>
+<p>Example:</p>
+<pre><code>Input:
+s = &quot;abcd&quot;
+t = &quot;abcde&quot;
+
+Output:
+e
+
+Explanation:
+&apos;e&apos; is the letter that was added.
 </code></pre>
       
     </div>
@@ -1472,7 +1647,7 @@ public:
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-String"><span class="nav-number">1.</span> <span class="nav-text">Reverse String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nim-Game"><span class="nav-number">2.</span> <span class="nav-text">Nim Game</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number"><span class="nav-number">3.</span> <span class="nav-text">Single Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-Digits"><span class="nav-number">4.</span> <span class="nav-text">Add Digits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maximum-Depth-of-Binary-Tree"><span class="nav-number">5.</span> <span class="nav-text">Maximum Depth of Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-Linked-List"><span class="nav-number">6.</span> <span class="nav-text">Reverse Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Counting-Bits"><span class="nav-number">7.</span> <span class="nav-text">Counting Bits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Invert-Binary-Tree"><span class="nav-number">8.</span> <span class="nav-text">Invert Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sum-of-Two-Integers"><span class="nav-number">9.</span> <span class="nav-text">Sum of Two Integers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number-III"><span class="nav-number">10.</span> <span class="nav-text">Single Number III</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Move-Zeroes"><span class="nav-number">11.</span> <span class="nav-text">Move Zeroes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Intersection-of-Two-Arrays"><span class="nav-number">12.</span> <span class="nav-text">Intersection of Two Arrays</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Delete-Node-in-a-Linked-List"><span class="nav-number">13.</span> <span class="nav-text">Delete Node in a Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Product-of-Array-Except-Self"><span class="nav-number">14.</span> <span class="nav-text">Product of Array Except Self</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Same-Tree"><span class="nav-number">15.</span> <span class="nav-text">Same Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Excel-Sheet-Column-Title"><span class="nav-number">16.</span> <span class="nav-text">Excel Sheet Column Title</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Valid-Anagram"><span class="nav-number">17.</span> <span class="nav-text">Valid Anagram</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fizz-Buzz"><span class="nav-number">18.</span> <span class="nav-text">Fizz Buzz</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maximum-Subarray"><span class="nav-number">19.</span> <span class="nav-text">Maximum Subarray</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Repeated-Substring-Pattern"><span class="nav-number">20.</span> <span class="nav-text">Repeated Substring Pattern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Climbing-Stairs"><span class="nav-number">21.</span> <span class="nav-text">Climbing Stairs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hamming-Distance"><span class="nav-number">22.</span> <span class="nav-text">Hamming Distance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Path-Sum"><span class="nav-number">23.</span> <span class="nav-text">Path Sum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Path-Sum-II"><span class="nav-number">24.</span> <span class="nav-text">Path Sum II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ugly-Number"><span class="nav-number">25.</span> <span class="nav-text">Ugly Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lowest-Common-Ancestor-of-a-Binary-Search-Tree"><span class="nav-number">26.</span> <span class="nav-text">Lowest Common Ancestor of a Binary Search Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Tree-Level-Order-Traversal-II"><span class="nav-number">27.</span> <span class="nav-text">Binary Tree Level Order Traversal II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Tree-Inorder-Traversal"><span class="nav-number">28.</span> <span class="nav-text">Binary Tree Inorder Traversal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#House-Robber"><span class="nav-number">29.</span> <span class="nav-text">House Robber</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#House-Robber-II"><span class="nav-number">30.</span> <span class="nav-text">House Robber II</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-String"><span class="nav-number">1.</span> <span class="nav-text">Reverse String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nim-Game"><span class="nav-number">2.</span> <span class="nav-text">Nim Game</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number"><span class="nav-number">3.</span> <span class="nav-text">Single Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-Digits"><span class="nav-number">4.</span> <span class="nav-text">Add Digits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maximum-Depth-of-Binary-Tree"><span class="nav-number">5.</span> <span class="nav-text">Maximum Depth of Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-Linked-List"><span class="nav-number">6.</span> <span class="nav-text">Reverse Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Counting-Bits"><span class="nav-number">7.</span> <span class="nav-text">Counting Bits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Invert-Binary-Tree"><span class="nav-number">8.</span> <span class="nav-text">Invert Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sum-of-Two-Integers"><span class="nav-number">9.</span> <span class="nav-text">Sum of Two Integers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number-III"><span class="nav-number">10.</span> <span class="nav-text">Single Number III</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Move-Zeroes"><span class="nav-number">11.</span> <span class="nav-text">Move Zeroes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Intersection-of-Two-Arrays"><span class="nav-number">12.</span> <span class="nav-text">Intersection of Two Arrays</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Delete-Node-in-a-Linked-List"><span class="nav-number">13.</span> <span class="nav-text">Delete Node in a Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Product-of-Array-Except-Self"><span class="nav-number">14.</span> <span class="nav-text">Product of Array Except Self</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Same-Tree"><span class="nav-number">15.</span> <span class="nav-text">Same Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Excel-Sheet-Column-Title"><span class="nav-number">16.</span> <span class="nav-text">Excel Sheet Column Title</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Valid-Anagram"><span class="nav-number">17.</span> <span class="nav-text">Valid Anagram</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fizz-Buzz"><span class="nav-number">18.</span> <span class="nav-text">Fizz Buzz</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maximum-Subarray"><span class="nav-number">19.</span> <span class="nav-text">Maximum Subarray</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Repeated-Substring-Pattern"><span class="nav-number">20.</span> <span class="nav-text">Repeated Substring Pattern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Climbing-Stairs"><span class="nav-number">21.</span> <span class="nav-text">Climbing Stairs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hamming-Distance"><span class="nav-number">22.</span> <span class="nav-text">Hamming Distance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Path-Sum"><span class="nav-number">23.</span> <span class="nav-text">Path Sum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Path-Sum-II"><span class="nav-number">24.</span> <span class="nav-text">Path Sum II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ugly-Number"><span class="nav-number">25.</span> <span class="nav-text">Ugly Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lowest-Common-Ancestor-of-a-Binary-Search-Tree"><span class="nav-number">26.</span> <span class="nav-text">Lowest Common Ancestor of a Binary Search Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Tree-Level-Order-Traversal-II"><span class="nav-number">27.</span> <span class="nav-text">Binary Tree Level Order Traversal II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Tree-Inorder-Traversal"><span class="nav-number">28.</span> <span class="nav-text">Binary Tree Inorder Traversal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#House-Robber"><span class="nav-number">29.</span> <span class="nav-text">House Robber</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#House-Robber-II"><span class="nav-number">30.</span> <span class="nav-text">House Robber II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Number-Complement"><span class="nav-number">31.</span> <span class="nav-text">Number Complement</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Max-Consecutive-Ones"><span class="nav-number">32.</span> <span class="nav-text">Max Consecutive Ones</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Island-Perimeter"><span class="nav-number">33.</span> <span class="nav-text">Island Perimeter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Find-All-Numbers-Disappeared-in-an-Array"><span class="nav-number">34.</span> <span class="nav-text">Find All Numbers Disappeared in an Array</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Construct-the-Rectangle"><span class="nav-number">35.</span> <span class="nav-text">Construct the Rectangle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Find-the-Difference"><span class="nav-number">36.</span> <span class="nav-text">Find the Difference</span></a></li></ol></div>
             
           </div>
         </section>
