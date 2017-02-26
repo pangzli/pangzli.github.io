@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/06/27/LeetCode题解/index.html">
 <meta property="og:site_name" content="胖子李">
 <meta property="og:description" content="开了个大坑，慢慢来，顺序是按Acceptance从大到小排序，等我全部做完以后再按类型分类，一天做两三个估计得三四个月（233">
-<meta property="og:updated_time" content="2016-11-08T11:39:12.000Z">
+<meta property="og:updated_time" content="2017-02-26T12:50:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode题解">
 <meta name="twitter:description" content="开了个大坑，慢慢来，顺序是按Acceptance从大到小排序，等我全部做完以后再按类型分类，一天做两三个估计得三四个月（233">
@@ -853,7 +853,196 @@ var fizzBuzz = function(n) {
     return arr;
 
 };
-</code></pre>
+</code></pre><h2 id="Maximum-Subarray"><a href="#Maximum-Subarray" class="headerlink" title="Maximum Subarray"></a>Maximum Subarray</h2><p>Find the contiguous subarray within an array (containing at least one number) which has the largest sum.</p>
+<p>For example, given the array [-2,1,-3,4,-1,2,1,-5,4],<br>the contiguous subarray [4,-1,2,1] has the largest sum = 6.</p>
+<pre><code>class Solution {
+public:
+    int maxSubArray(vector&lt;int&gt;&amp; nums) {
+        // 返回的是最大子数组的和
+
+        int n = nums.size();
+        vector&lt;int&gt; sum(n,0);
+        sum[0] = nums[0];
+        int res = sum[0];
+        for(int i=1; i&lt;n; i++) {
+            sum[i] = max(nums[i], nums[i]+sum[i-1]);
+            res = max(res, sum[i]);
+        }
+
+        return res;
+    }
+};
+</code></pre><p>使用一个vector存储一个sum数组，sum[i] = max(nums[i]+sum[i-1], nums[i])， res是当前的res和sum[i]的比较，时间复杂度为O(n)</p>
+<h2 id="Repeated-Substring-Pattern"><a href="#Repeated-Substring-Pattern" class="headerlink" title="Repeated Substring Pattern"></a>Repeated Substring Pattern</h2><p>Given a non-empty string check if it can be constructed by taking a substring of it and appending multiple copies of the substring together. You may assume the given string consists of lowercase English letters only and its length will not exceed 10000.</p>
+<p>Example 1:</p>
+<pre><code>Input: &quot;abab&quot;
+Output: True
+Explanation: It&apos;s the substring &quot;ab&quot; twice.
+</code></pre><p>Example 2:</p>
+<pre><code>Input: &quot;aba&quot;
+Output: False
+</code></pre><p>Example 3:</p>
+<pre><code>Input: &quot;abcabcabcabc&quot;
+Output: True
+
+Explanation: It&apos;s the substring &quot;abc&quot; four times.     (And the substring &quot;abcabc&quot; twice.)
+</code></pre><p>代码实现：</p>
+<pre><code>class Solution {
+public:
+    bool repeatedSubstringPattern(string str) {
+        // 判断一个字符串能否被拆成重复的子字符串
+
+        bool res = false;
+
+        int n = str.size(); 
+
+        for(int p=1;p&lt;=n/2;p++){ // 两个相同字符的间距
+            int i;
+            for(i=0; i&lt;n-p; i++) {
+                res = true;
+                if(str[i] != str[i+p]){
+                    res = false;
+                    break;
+                }
+            }
+            if(res == true &amp;&amp; i%p == 0){
+                res = true;
+                break;
+            }else res = false;
+        }
+
+        return res;
+    }
+};
+</code></pre><p>间隔从1开始，判断相邻间隔的字符是否相同。</p>
+<h2 id="Climbing-Stairs"><a href="#Climbing-Stairs" class="headerlink" title="Climbing Stairs"></a>Climbing Stairs</h2><p>You are climbing a stair case. It takes n steps to reach to the top.</p>
+<p>Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?</p>
+<pre><code>class Solution {
+public:
+    int climbStairs(int n) {
+        // 一共需要走n步，每次可以走一步或者两步，返回的是一共可以有多少种方法走到山顶
+        // 就是斐波那契数列
+        if(n&lt;=3)return n;
+        int a[2] = {2,3};
+        for(int i=4; i&lt;=n; i++){
+            int t = a[0]+a[1];
+            a[0] = a[1];
+            a[1] = t;
+        }
+
+        return a[1];
+    }
+};
+</code></pre><p>要把实际问题转换成特殊的数学模型，这个算法就是转换成斐波那契数列。</p>
+<h2 id="Hamming-Distance"><a href="#Hamming-Distance" class="headerlink" title="Hamming Distance"></a>Hamming Distance</h2><p>The Hamming distance between two integers is the number of positions at which the corresponding bits are different.</p>
+<p>Given two integers x and y, calculate the Hamming distance.</p>
+<p>Note:<br>0 ≤ x, y &lt; 231.</p>
+<p>Example:</p>
+<pre><code>Input: x = 1, y = 4
+
+Output: 2
+
+Explanation:
+1   (0 0 0 1)
+4   (0 1 0 0)
+       ↑   ↑
+</code></pre><p>The above arrows point to positions where the corresponding bits are different.</p>
+<pre><code>class Solution {
+public:
+    int hammingDistance(int x, int y) {
+        int cnt = 0;
+        int t = x ^ y;
+        while(t){
+            if(t &amp; 1){
+                cnt++;
+            }
+            t&gt;&gt;=1;
+        }
+        return cnt;
+    }
+};
+</code></pre><p>这个算法较为简单，利用异或性质可以简单得出结果。</p>
+<h2 id="Path-Sum"><a href="#Path-Sum" class="headerlink" title="Path Sum"></a>Path Sum</h2><p>Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum.</p>
+<p>For example:<br>Given the below binary tree and sum = 22,</p>
+<pre><code>      5
+     / \
+    4   8
+   /   / \
+  11  13  4
+ /  \      \
+7    2      1
+</code></pre><p>return true, as there exist a root-to-leaf path 5-&gt;4-&gt;11-&gt;2 which sum is 22.</p>
+<pre><code>/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool hasPathSum(TreeNode* root, int sum) {
+        // 二叉树类型的算法基本都会利用递归
+        if(root == NULL)return false;
+        else if(root-&gt;val == sum &amp;&amp; root-&gt;left == NULL &amp;&amp; root-&gt;right == NULL)return true;
+        else{
+            return hasPathSum(root-&gt;left, sum - root-&gt;val) || hasPathSum(root-&gt;right, sum - root-&gt;val);
+        }
+
+    }
+};
+</code></pre><h2 id="Path-Sum-II"><a href="#Path-Sum-II" class="headerlink" title="Path Sum II"></a>Path Sum II</h2><p>Given a binary tree and a sum, find all root-to-leaf paths where each path’s sum equals the given sum.</p>
+<p>For example:<br>Given the below binary tree and sum = 22,</p>
+<pre><code>      5
+     / \
+    4   8
+   /   / \
+  11  13  4
+ /  \    / \
+7    2  5   1
+</code></pre><p>return</p>
+<pre><code>[
+   [5,4,11,2],
+   [5,8,4,5]
+]
+
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector&lt;vector&lt;int&gt;&gt; pathSum(TreeNode* root, int sum) {
+        vector&lt;vector&lt;int&gt;&gt; res;
+        vector&lt;int&gt; v;
+        addVec(root, sum, v, res);
+        return res;
+    }
+
+    void addVec(TreeNode* root, int sum, vector&lt;int&gt; &amp;pre, vector&lt;vector&lt;int&gt;&gt; &amp;res){
+        if(root == NULL) return;
+        vector&lt;int&gt; v;
+        v.assign(pre.begin(), pre.end());
+        v.push_back(root-&gt;val);
+        if(root-&gt;val == sum &amp;&amp; root-&gt;left == NULL &amp;&amp; root-&gt;right == NULL){
+            res.push_back(v);
+            return;
+        }
+
+        addVec(root-&gt;left, sum - root-&gt;val, v, res);
+        addVec(root-&gt;right, sum - root-&gt;val, v, res);
+    }
+};
+</code></pre><p>还是利用递归，但是在辅助函数中，每次要用一个新的数组v来存储数据，不要在传递进来的引用数组上操作。</p>
+
       
     </div>
 
@@ -1002,7 +1191,7 @@ var fizzBuzz = function(n) {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-String"><span class="nav-number">1.</span> <span class="nav-text">Reverse String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nim-Game"><span class="nav-number">2.</span> <span class="nav-text">Nim Game</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number"><span class="nav-number">3.</span> <span class="nav-text">Single Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-Digits"><span class="nav-number">4.</span> <span class="nav-text">Add Digits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maximum-Depth-of-Binary-Tree"><span class="nav-number">5.</span> <span class="nav-text">Maximum Depth of Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-Linked-List"><span class="nav-number">6.</span> <span class="nav-text">Reverse Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Counting-Bits"><span class="nav-number">7.</span> <span class="nav-text">Counting Bits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Invert-Binary-Tree"><span class="nav-number">8.</span> <span class="nav-text">Invert Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sum-of-Two-Integers"><span class="nav-number">9.</span> <span class="nav-text">Sum of Two Integers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number-III"><span class="nav-number">10.</span> <span class="nav-text">Single Number III</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Move-Zeroes"><span class="nav-number">11.</span> <span class="nav-text">Move Zeroes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Intersection-of-Two-Arrays"><span class="nav-number">12.</span> <span class="nav-text">Intersection of Two Arrays</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Delete-Node-in-a-Linked-List"><span class="nav-number">13.</span> <span class="nav-text">Delete Node in a Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Product-of-Array-Except-Self"><span class="nav-number">14.</span> <span class="nav-text">Product of Array Except Self</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Same-Tree"><span class="nav-number">15.</span> <span class="nav-text">Same Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Excel-Sheet-Column-Title"><span class="nav-number">16.</span> <span class="nav-text">Excel Sheet Column Title</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Valid-Anagram"><span class="nav-number">17.</span> <span class="nav-text">Valid Anagram</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fizz-Buzz"><span class="nav-number">18.</span> <span class="nav-text">Fizz Buzz</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-String"><span class="nav-number">1.</span> <span class="nav-text">Reverse String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nim-Game"><span class="nav-number">2.</span> <span class="nav-text">Nim Game</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number"><span class="nav-number">3.</span> <span class="nav-text">Single Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-Digits"><span class="nav-number">4.</span> <span class="nav-text">Add Digits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maximum-Depth-of-Binary-Tree"><span class="nav-number">5.</span> <span class="nav-text">Maximum Depth of Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-Linked-List"><span class="nav-number">6.</span> <span class="nav-text">Reverse Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Counting-Bits"><span class="nav-number">7.</span> <span class="nav-text">Counting Bits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Invert-Binary-Tree"><span class="nav-number">8.</span> <span class="nav-text">Invert Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sum-of-Two-Integers"><span class="nav-number">9.</span> <span class="nav-text">Sum of Two Integers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number-III"><span class="nav-number">10.</span> <span class="nav-text">Single Number III</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Move-Zeroes"><span class="nav-number">11.</span> <span class="nav-text">Move Zeroes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Intersection-of-Two-Arrays"><span class="nav-number">12.</span> <span class="nav-text">Intersection of Two Arrays</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Delete-Node-in-a-Linked-List"><span class="nav-number">13.</span> <span class="nav-text">Delete Node in a Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Product-of-Array-Except-Self"><span class="nav-number">14.</span> <span class="nav-text">Product of Array Except Self</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Same-Tree"><span class="nav-number">15.</span> <span class="nav-text">Same Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Excel-Sheet-Column-Title"><span class="nav-number">16.</span> <span class="nav-text">Excel Sheet Column Title</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Valid-Anagram"><span class="nav-number">17.</span> <span class="nav-text">Valid Anagram</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fizz-Buzz"><span class="nav-number">18.</span> <span class="nav-text">Fizz Buzz</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maximum-Subarray"><span class="nav-number">19.</span> <span class="nav-text">Maximum Subarray</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Repeated-Substring-Pattern"><span class="nav-number">20.</span> <span class="nav-text">Repeated Substring Pattern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Climbing-Stairs"><span class="nav-number">21.</span> <span class="nav-text">Climbing Stairs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hamming-Distance"><span class="nav-number">22.</span> <span class="nav-text">Hamming Distance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Path-Sum"><span class="nav-number">23.</span> <span class="nav-text">Path Sum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Path-Sum-II"><span class="nav-number">24.</span> <span class="nav-text">Path Sum II</span></a></li></ol></div>
             
           </div>
         </section>
