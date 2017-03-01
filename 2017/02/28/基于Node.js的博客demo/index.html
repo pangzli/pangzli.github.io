@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/02/28/基于Node.js的博客demo/index.html">
 <meta property="og:site_name" content="胖子李">
 <meta property="og:description" content="大体思路按照Express入门教程：一个简单的博客，但在过程中出现了一些问题。">
-<meta property="og:updated_time" content="2017-03-01T11:17:08.000Z">
+<meta property="og:updated_time" content="2017-03-01T14:42:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用Node.js、express、mongoDB实现一个多用户博客">
 <meta name="twitter:description" content="大体思路按照Express入门教程：一个简单的博客，但在过程中出现了一些问题。">
@@ -312,7 +312,7 @@
     url: &apos;mongodb://localhost/blog&apos;
   })
 }));
-</code></pre><p>2、    在app.js中，代码顺序是很关键的，由于在路由routes中使用了req.flash()这个方法并且要用session存取数据，所以要按照先session连接数据库，再添加flash功能，最后设置路由，否则，在route中就拿不到session数据。</p>
+</code></pre><p>2、    在app.js中，中间件的加载顺序很重要，由于connect-flash中间件是基于 session 的，在路由routes中使用了req.flash()这个方法，所以要按照先session连接数据库，再添加flash功能，最后设置路由，否则，在route中就拿不到session数据。</p>
 <pre><code>// 将会话信息存储到mongodb中 要在路由前面
 app.use(session({
   secret: settings.cookieSecret, // 防止篡改cookie
