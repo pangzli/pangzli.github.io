@@ -84,15 +84,16 @@
 
 
 
-<meta name="description" content="一个人的命运啊，当然要靠自我奋斗。但是，也要考虑到历史的行程。（手动滑稽">
-<meta property="og:type" content="website">
-<meta property="og:title" content="胖子李">
-<meta property="og:url" content="http://yoursite.com/archives/2016/07/index.html">
+<meta name="description" content="大体思路按照Express入门教程：一个简单的博客，但在过程中出现了一些问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用Node.js、express、mongoDB实现一个多用户博客">
+<meta property="og:url" content="http://yoursite.com/2017/02/28/基于Node.js的博客demo/index.html">
 <meta property="og:site_name" content="胖子李">
-<meta property="og:description" content="一个人的命运啊，当然要靠自我奋斗。但是，也要考虑到历史的行程。（手动滑稽">
+<meta property="og:description" content="大体思路按照Express入门教程：一个简单的博客，但在过程中出现了一些问题。">
+<meta property="og:updated_time" content="2017-03-01T11:17:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="胖子李">
-<meta name="twitter:description" content="一个人的命运啊，当然要靠自我奋斗。但是，也要考虑到历史的行程。（手动滑稽">
+<meta name="twitter:title" content="利用Node.js、express、mongoDB实现一个多用户博客">
+<meta name="twitter:description" content="大体思路按照Express入门教程：一个简单的博客，但在过程中出现了一些问题。">
 
 
 
@@ -113,9 +114,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2016/07/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/02/28/基于Node.js的博客demo/"/>
 
-  <title> 归档 | 胖子李 </title>
+  <title> 利用Node.js、express、mongoDB实现一个多用户博客 | 胖子李 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -146,7 +147,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -214,66 +215,171 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 9 篇日志。 继续努力。
-    </span>
-
+  <div id="posts" class="posts-expand">
     
 
-      
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                利用Node.js、express、mongoDB实现一个多用户博客
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-28T14:22:18+08:00" content="2017-02-28">
+              2017-02-28
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/28/基于Node.js的博客demo/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/28/基于Node.js的博客demo/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+		  
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
       
       
 
       
+        <p>大体思路按照<a href="http://www.tuicool.com/articles/jueARjE" target="_blank" rel="external">Express入门教程：一个简单的博客</a>，但在过程中出现了一些问题。 </p>
+<a id="more"></a>
+<p>1、在express中，由于版本升级，旧版本中使用session将数据存到mongoDB中的代码为：</p>
+<pre><code>app.use(session({
+  secret: settings.cookieSecret,
+  key: settings.db,//cookie name
+  cookie: {maxAge: 1000 * 60 * 60 * 24 * 30},//30 days
+  store: new MongoStore({
+    db: settings.db,
+    host: settings.host,
+    port: settings.port
+  })
+}));
+</code></pre><p>而新版本中，store的参数MongoStore的示例参数要设置为url参数</p>
+<pre><code>app.use(session({
+  secret: settings.cookieSecret, // 防止篡改cookie
+  key: settings.db,//cookie name
+  cookie: {maxAge: 1000 * 60 * 60 * 24 * 30},//30 days cookie的生存期
+  resave: false,
+  saveUninitialized: true,
+  store: new MongoStore({
+    url: &apos;mongodb://localhost/blog&apos;
+  })
+}));
+</code></pre><p>2、    在app.js中，代码顺序是很关键的，由于在路由routes中使用了req.flash()这个方法并且要用session存取数据，所以要按照先session连接数据库，再添加flash功能，最后设置路由，否则，在route中就拿不到session数据。</p>
+<pre><code>// 将会话信息存储到mongodb中 要在路由前面
+app.use(session({
+  secret: settings.cookieSecret, // 防止篡改cookie
+  key: settings.db,//cookie name
+  cookie: {maxAge: 1000 * 60 * 60 * 24 * 30},//30 days cookie的生存期
+  resave: false,
+  saveUninitialized: true,
+  store: new MongoStore({
+    url: &apos;mongodb://localhost/blog&apos;
+  })
+}));
+app.use(flash()); // 添加flash功能 // 这里要在routes前面
+// 路由控制器
+routes(app);
+</code></pre><p>3、在生产环境中，由于有时会断开mongoDB，再连接的时候端口会被占用，此时无法重新开启数据库</p>
+<p>解决方法为下面两行指令，第一行会显示目前占用数据库端口的进程，第二条第二个参数就是占用端口号：</p>
+<pre><code>ps aux |grep mongod
+kill -9 xxxxx
+</code></pre><p>4、在写User和Post的save和get方法时，会有很多回掉函数callback出现，可以使用ES6中的promise或者TJ做的co等方式来处理过多的回调，也可以用目前还在ES7的async/await。</p>
+<p>5、同样是在写User和Post的save和get方法时，要注意，save方法是原型方法而get不是，因为save是保存当前的对象。</p>
+
+      
+    </div>
+
+    <div>
+      
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/18/ImmutableJS/" rel="next" title="Immutable">
+                <i class="fa fa-chevron-left"></i> Immutable
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
         </div>
       
-      
 
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/10/Hexo-NexT主题/" itemprop="url">
-              
-                <span itemprop="name">Hexo-NexT主题</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-10T00:35:05+08:00"
-              content="2016-07-10" >
-          07-10
-        </time>
-      </div>
-
-    </header>
+      
+    </footer>
   </article>
 
 
 
-    
-
-  </section>
-
-  
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -281,6 +387,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/02/28/基于Node.js的博客demo/"
+           data-title="利用Node.js、express、mongoDB实现一个多用户博客" data-url="http://yoursite.com/2017/02/28/基于Node.js的博客demo/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -300,8 +414,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://ww4.sinaimg.cn/mw690/719c39c3gw1f4jhs5r30dj206o06o74c.jpg"
@@ -348,6 +471,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -464,11 +598,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
 
 
   
