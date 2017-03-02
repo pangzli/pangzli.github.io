@@ -91,7 +91,7 @@
 <meta property="og:site_name" content="胖子李">
 <meta property="og:description" content="LeetCode上算法题的思路和代码实现。">
 <meta property="og:image" content="https://leetcode.com/static/images/problemset/island.png">
-<meta property="og:updated_time" content="2017-03-02T12:04:19.000Z">
+<meta property="og:updated_time" content="2017-03-02T16:39:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode题解">
 <meta name="twitter:description" content="LeetCode上算法题的思路和代码实现。">
@@ -1611,6 +1611,200 @@ public:
         return node;
     }
 };
+</code></pre><h2 id="Implement-Queue-using-Stacks"><a href="#Implement-Queue-using-Stacks" class="headerlink" title="Implement Queue using Stacks"></a>Implement Queue using Stacks</h2><p>Implement the following operations of a queue using stacks.</p>
+<ul>
+<li>push(x) – Push element x to the back of queue.</li>
+<li>pop() – Removes the element from in front of queue.</li>
+<li>peek() – Get the front element.</li>
+<li>empty() – Return whether the queue is empty.</li>
+</ul>
+<p>Notes:</p>
+<ul>
+<li>You must use only standard operations of a stack – which means only push to top, peek/pop from top, size, and is empty operations are valid.</li>
+<li>Depending on your language, stack may not be supported natively. You may simulate a stack by using a list or deque (double-ended queue), as long as you use only standard operations of a stack.</li>
+<li>You may assume that all operations are valid (for example, no pop or peek operations will be called on an empty queue).</li>
+</ul>
+<p>代码实现：</p>
+<pre><code>class MyQueue {
+private:
+    stack&lt;int&gt; s1, s2;
+    void transfer(stack&lt;int&gt; &amp;s1, stack&lt;int&gt; &amp;s2){
+         while(!s1.empty()){
+            s2.push(s1.top());
+            s1.pop();
+        }
+    }
+
+public:
+    /** Initialize your data structure here. */
+    MyQueue() {
+    }
+
+    /** Push element x to the back of queue. */
+    void push(int x) {
+        s1.push(x);
+    }
+
+    /** Removes the element from in front of queue and returns that element. */
+    int pop() {
+       transfer(s1, s2);
+       int res = s2.top();
+       s2.pop();
+       transfer(s2, s1);
+       return res;
+    }
+
+    /** Get the front element. */
+    int peek() {
+        transfer(s1, s2);
+        int res = s2.top();
+        transfer(s2,s1);
+        return res;
+    }
+
+    /** Returns whether the queue is empty. */
+    bool empty() {
+        return s1.empty();
+    }
+};
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * bool param_4 = obj.empty();
+ */
+</code></pre><h2 id="Implement-Stack-using-Queues"><a href="#Implement-Stack-using-Queues" class="headerlink" title="Implement Stack using Queues"></a>Implement Stack using Queues</h2><p>Implement the following operations of a stack using queues.</p>
+<ul>
+<li>push(x) – Push element x onto stack.</li>
+<li>pop() – Removes the element on top of the stack.</li>
+<li>top() – Get the top element.</li>
+<li>empty() – Return whether the stack is empty.</li>
+</ul>
+<p>代码实现：</p>
+<pre><code>class MyStack {
+private:
+    queue&lt;int&gt; q1;
+public:
+    /** Initialize your data structure here. */
+    MyStack() {
+
+    }
+
+    /** Push element x onto stack. */
+    void push(int x) {
+        q1.push(x);
+    }
+
+    /** Removes the element on top of the stack and returns that element. */
+    int pop() {
+        if(!empty()){
+            int length = q1.size();
+            while(length-- &gt; 1){
+                q1.push(q1.front());
+                q1.pop();
+            }
+
+            int res = q1.front();
+            q1.pop();
+            return res;
+        }
+    }
+
+    /** Get the top element. */
+    int top() {
+        int res = q1.back();
+        return res;
+    }
+
+    /** Returns whether the stack is empty. */
+    bool empty() {
+        return q1.empty();
+    }
+};
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * MyStack obj = new MyStack();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.top();
+ * bool param_4 = obj.empty();
+ */
+</code></pre><p>由于有一个queue.back()方法，所以使用一个队列就可以模拟栈，在pop方法中，通过不断地将队头弹出插入到队尾，直到要弹出的元素从队尾移到队头，弹出就可以了。</p>
+<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><p>挖坑填数法：<br><a href="http://blog.csdn.net/morewindows/article/details/6684558" target="_blank" rel="external">参考资料</a></p>
+<pre><code>class QuickSort {
+public:
+    int* quickSort(int* A, int n) {
+        // write code here
+        quicksort(A, 0, n-1);
+        return A;
+    }
+    void quicksort(int *A, int start, int end){
+        if(start &lt; end){
+            int index = Partition(A, start, end);
+            quicksort(A, start, index-1);
+            quicksort(A, index+1, end);
+        }
+    }
+
+    int Partition(int *A, int start, int end){
+        int i = start, j = end;
+        int key = A[start]; //挖坑填数
+        while(i &lt; j){
+            while(i &lt; j &amp;&amp; A[j] &gt; key) j--;
+            if(i&lt;j){
+                A[i] = A[j];
+                i++;
+            }
+            while(i &lt; j &amp;&amp; A[i] &lt; key) i++;
+            if(i&lt;j){
+                A[j] = A[i];
+                j--;
+            }
+        }
+
+        A[i] = key;
+        return i;
+    }
+
+};
+</code></pre><h2 id="Find-Minimum-in-Rotated-Sorted-Array"><a href="#Find-Minimum-in-Rotated-Sorted-Array" class="headerlink" title="Find Minimum in Rotated Sorted Array"></a>Find Minimum in Rotated Sorted Array</h2><p>Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.</p>
+<p>(i.e., <strong>0 1 2 4 5 6 7</strong> might become <strong>4 5 6 7 0 1 2</strong>).</p>
+<p>Find the minimum element.</p>
+<p>You may assume no duplicate exists in the array.</p>
+<pre><code>class Solution {
+public:
+    int findMin(vector&lt;int&gt;&amp; nums) {
+        int low = 0, high = nums.size()-1;
+        int indexMid = low;
+        while(nums[low] &gt;= nums[high]){
+            if(high - low == 1){
+                indexMid = high;
+                break;
+            }
+            indexMid = (low+high) / 2;
+
+            if(nums[low] == nums[high] &amp;&amp; nums[low] == nums[indexMid] &amp;&amp; nums[high] == nums[indexMid]){
+                return MinInOrder(nums, low, high);
+            }
+
+            if(nums[low] &lt;= nums[indexMid]) low = indexMid;
+            else if(nums[indexMid] &lt;= nums[high]) high = indexMid;
+        }
+        return nums[indexMid];
+    }
+
+    int MinInOrder(vector&lt;int&gt;&amp; nums, int low, int high){
+        int minN = nums[low];
+        for(int i = low+1; i&lt;=high; i++){
+            minN = min(minN, nums[i]);
+        }
+        return minN;
+    }
+};
 </code></pre>
       
     </div>
@@ -1760,7 +1954,7 @@ public:
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-String"><span class="nav-number">1.</span> <span class="nav-text">Reverse String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nim-Game"><span class="nav-number">2.</span> <span class="nav-text">Nim Game</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number"><span class="nav-number">3.</span> <span class="nav-text">Single Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-Digits"><span class="nav-number">4.</span> <span class="nav-text">Add Digits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maximum-Depth-of-Binary-Tree"><span class="nav-number">5.</span> <span class="nav-text">Maximum Depth of Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-Linked-List"><span class="nav-number">6.</span> <span class="nav-text">Reverse Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Counting-Bits"><span class="nav-number">7.</span> <span class="nav-text">Counting Bits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Invert-Binary-Tree"><span class="nav-number">8.</span> <span class="nav-text">Invert Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sum-of-Two-Integers"><span class="nav-number">9.</span> <span class="nav-text">Sum of Two Integers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number-III"><span class="nav-number">10.</span> <span class="nav-text">Single Number III</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Move-Zeroes"><span class="nav-number">11.</span> <span class="nav-text">Move Zeroes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Intersection-of-Two-Arrays"><span class="nav-number">12.</span> <span class="nav-text">Intersection of Two Arrays</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Delete-Node-in-a-Linked-List"><span class="nav-number">13.</span> <span class="nav-text">Delete Node in a Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Product-of-Array-Except-Self"><span class="nav-number">14.</span> <span class="nav-text">Product of Array Except Self</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Same-Tree"><span class="nav-number">15.</span> <span class="nav-text">Same Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Excel-Sheet-Column-Title"><span class="nav-number">16.</span> <span class="nav-text">Excel Sheet Column Title</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Valid-Anagram"><span class="nav-number">17.</span> <span class="nav-text">Valid Anagram</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fizz-Buzz"><span class="nav-number">18.</span> <span class="nav-text">Fizz Buzz</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maximum-Subarray"><span class="nav-number">19.</span> <span class="nav-text">Maximum Subarray</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Repeated-Substring-Pattern"><span class="nav-number">20.</span> <span class="nav-text">Repeated Substring Pattern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Climbing-Stairs"><span class="nav-number">21.</span> <span class="nav-text">Climbing Stairs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hamming-Distance"><span class="nav-number">22.</span> <span class="nav-text">Hamming Distance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Path-Sum"><span class="nav-number">23.</span> <span class="nav-text">Path Sum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Path-Sum-II"><span class="nav-number">24.</span> <span class="nav-text">Path Sum II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ugly-Number"><span class="nav-number">25.</span> <span class="nav-text">Ugly Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ugly-Number-II"><span class="nav-number">26.</span> <span class="nav-text">Ugly Number II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lowest-Common-Ancestor-of-a-Binary-Search-Tree"><span class="nav-number">27.</span> <span class="nav-text">Lowest Common Ancestor of a Binary Search Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Tree-Level-Order-Traversal-II"><span class="nav-number">28.</span> <span class="nav-text">Binary Tree Level Order Traversal II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Tree-Inorder-Traversal"><span class="nav-number">29.</span> <span class="nav-text">Binary Tree Inorder Traversal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#House-Robber"><span class="nav-number">30.</span> <span class="nav-text">House Robber</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#House-Robber-II"><span class="nav-number">31.</span> <span class="nav-text">House Robber II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Number-Complement"><span class="nav-number">32.</span> <span class="nav-text">Number Complement</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Max-Consecutive-Ones"><span class="nav-number">33.</span> <span class="nav-text">Max Consecutive Ones</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Island-Perimeter"><span class="nav-number">34.</span> <span class="nav-text">Island Perimeter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Find-All-Numbers-Disappeared-in-an-Array"><span class="nav-number">35.</span> <span class="nav-text">Find All Numbers Disappeared in an Array</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Construct-the-Rectangle"><span class="nav-number">36.</span> <span class="nav-text">Construct the Rectangle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Search-a-2D-Matrix"><span class="nav-number">37.</span> <span class="nav-text">Search a 2D Matrix</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#替换空格"><span class="nav-number">38.</span> <span class="nav-text">替换空格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重建二叉树"><span class="nav-number">39.</span> <span class="nav-text">重建二叉树</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-String"><span class="nav-number">1.</span> <span class="nav-text">Reverse String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nim-Game"><span class="nav-number">2.</span> <span class="nav-text">Nim Game</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number"><span class="nav-number">3.</span> <span class="nav-text">Single Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-Digits"><span class="nav-number">4.</span> <span class="nav-text">Add Digits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maximum-Depth-of-Binary-Tree"><span class="nav-number">5.</span> <span class="nav-text">Maximum Depth of Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-Linked-List"><span class="nav-number">6.</span> <span class="nav-text">Reverse Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Counting-Bits"><span class="nav-number">7.</span> <span class="nav-text">Counting Bits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Invert-Binary-Tree"><span class="nav-number">8.</span> <span class="nav-text">Invert Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sum-of-Two-Integers"><span class="nav-number">9.</span> <span class="nav-text">Sum of Two Integers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number-III"><span class="nav-number">10.</span> <span class="nav-text">Single Number III</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Move-Zeroes"><span class="nav-number">11.</span> <span class="nav-text">Move Zeroes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Intersection-of-Two-Arrays"><span class="nav-number">12.</span> <span class="nav-text">Intersection of Two Arrays</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Delete-Node-in-a-Linked-List"><span class="nav-number">13.</span> <span class="nav-text">Delete Node in a Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Product-of-Array-Except-Self"><span class="nav-number">14.</span> <span class="nav-text">Product of Array Except Self</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Same-Tree"><span class="nav-number">15.</span> <span class="nav-text">Same Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Excel-Sheet-Column-Title"><span class="nav-number">16.</span> <span class="nav-text">Excel Sheet Column Title</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Valid-Anagram"><span class="nav-number">17.</span> <span class="nav-text">Valid Anagram</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fizz-Buzz"><span class="nav-number">18.</span> <span class="nav-text">Fizz Buzz</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maximum-Subarray"><span class="nav-number">19.</span> <span class="nav-text">Maximum Subarray</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Repeated-Substring-Pattern"><span class="nav-number">20.</span> <span class="nav-text">Repeated Substring Pattern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Climbing-Stairs"><span class="nav-number">21.</span> <span class="nav-text">Climbing Stairs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hamming-Distance"><span class="nav-number">22.</span> <span class="nav-text">Hamming Distance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Path-Sum"><span class="nav-number">23.</span> <span class="nav-text">Path Sum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Path-Sum-II"><span class="nav-number">24.</span> <span class="nav-text">Path Sum II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ugly-Number"><span class="nav-number">25.</span> <span class="nav-text">Ugly Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ugly-Number-II"><span class="nav-number">26.</span> <span class="nav-text">Ugly Number II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lowest-Common-Ancestor-of-a-Binary-Search-Tree"><span class="nav-number">27.</span> <span class="nav-text">Lowest Common Ancestor of a Binary Search Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Tree-Level-Order-Traversal-II"><span class="nav-number">28.</span> <span class="nav-text">Binary Tree Level Order Traversal II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Tree-Inorder-Traversal"><span class="nav-number">29.</span> <span class="nav-text">Binary Tree Inorder Traversal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#House-Robber"><span class="nav-number">30.</span> <span class="nav-text">House Robber</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#House-Robber-II"><span class="nav-number">31.</span> <span class="nav-text">House Robber II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Number-Complement"><span class="nav-number">32.</span> <span class="nav-text">Number Complement</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Max-Consecutive-Ones"><span class="nav-number">33.</span> <span class="nav-text">Max Consecutive Ones</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Island-Perimeter"><span class="nav-number">34.</span> <span class="nav-text">Island Perimeter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Find-All-Numbers-Disappeared-in-an-Array"><span class="nav-number">35.</span> <span class="nav-text">Find All Numbers Disappeared in an Array</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Construct-the-Rectangle"><span class="nav-number">36.</span> <span class="nav-text">Construct the Rectangle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Search-a-2D-Matrix"><span class="nav-number">37.</span> <span class="nav-text">Search a 2D Matrix</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#替换空格"><span class="nav-number">38.</span> <span class="nav-text">替换空格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重建二叉树"><span class="nav-number">39.</span> <span class="nav-text">重建二叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implement-Queue-using-Stacks"><span class="nav-number">40.</span> <span class="nav-text">Implement Queue using Stacks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implement-Stack-using-Queues"><span class="nav-number">41.</span> <span class="nav-text">Implement Stack using Queues</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速排序"><span class="nav-number">42.</span> <span class="nav-text">快速排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Find-Minimum-in-Rotated-Sorted-Array"><span class="nav-number">43.</span> <span class="nav-text">Find Minimum in Rotated Sorted Array</span></a></li></ol></div>
             
           </div>
         </section>
