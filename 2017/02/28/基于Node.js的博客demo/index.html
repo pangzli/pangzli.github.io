@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/02/28/基于Node.js的博客demo/index.html">
 <meta property="og:site_name" content="胖子李">
 <meta property="og:description" content="大体思路按照Express入门教程：一个简单的博客，但在过程中出现了一些问题。">
-<meta property="og:updated_time" content="2017-03-01T14:42:33.000Z">
+<meta property="og:updated_time" content="2017-03-01T15:07:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用Node.js、express、mongoDB实现一个多用户博客">
 <meta name="twitter:description" content="大体思路按照Express入门教程：一个简单的博客，但在过程中出现了一些问题。">
@@ -327,6 +327,10 @@ app.use(session({
 app.use(flash()); // 添加flash功能 // 这里要在routes前面
 // 路由控制器
 routes(app);
+</code></pre><p>express-session、connect-mongo 和 connect-flash 的区别与联系</p>
+<pre><code>express-session: 会话（session）支持中间件
+connect-mongo: 将 session 存储于 mongodb，需结合 express-session 使用，我们也可以将 session 存储于 redis，如 connect-redis
+connect-flash: 基于 session 实现的用于通知功能的中间件，需结合 express-session 使用
 </code></pre><p>3、在生产环境中，由于有时会断开mongoDB，再连接的时候端口会被占用，此时无法重新开启数据库</p>
 <p>解决方法为下面两行指令，第一行会显示目前占用数据库端口的进程，第二条第二个参数就是占用端口号：</p>
 <pre><code>ps aux |grep mongod
