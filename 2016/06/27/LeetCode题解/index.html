@@ -91,7 +91,7 @@
 <meta property="og:site_name" content="胖子李">
 <meta property="og:description" content="LeetCode上算法题的思路和代码实现。">
 <meta property="og:image" content="https://leetcode.com/static/images/problemset/island.png">
-<meta property="og:updated_time" content="2017-03-03T03:17:43.000Z">
+<meta property="og:updated_time" content="2017-03-09T15:42:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode题解">
 <meta name="twitter:description" content="LeetCode上算法题的思路和代码实现。">
@@ -518,6 +518,36 @@ public:
         head-&gt;next = NULL;
 
         return h;
+    }
+};
+</code></pre><p>利用栈实现：</p>
+<pre><code>/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* pHead) {
+        if(!pHead || !pHead-&gt;next) return pHead;
+        stack&lt;ListNode *&gt; s;
+        ListNode *node = pHead;
+        while(node-&gt;next){
+            s.push(node);
+            node = node-&gt;next;
+        }
+
+        ListNode *newHead = node;
+        while(!s.empty()){
+            node-&gt;next = s.top();
+            node = node-&gt;next;
+            s.pop();
+        }
+        node-&gt;next = NULL;
+        return newHead;
     }
 };
 </code></pre><p>递归方法简单易懂。</p>
@@ -1805,6 +1835,45 @@ public:
         return minN;
     }
 };
+</code></pre><h2 id="Search-in-Rotated-Sorted-Array"><a href="#Search-in-Rotated-Sorted-Array" class="headerlink" title="Search in Rotated Sorted Array"></a>Search in Rotated Sorted Array</h2><p>Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.</p>
+<p>(i.e., 0 1 2 4 5 6 7 might become 4 5 6 7 0 1 2).</p>
+<p>You are given a target value to search. If found in the array return its index, otherwise return -1.</p>
+<p>You may assume no duplicate exists in the array.</p>
+<pre><code>class Solution {
+public:
+    int search(vector&lt;int&gt;&amp; nums, int target) {
+        if(nums.size()==0)return -1;
+        if(nums.size()==1)return nums[0] == target ? 0:-1;
+        int low = 0, high = nums.size()-1;
+        while(low&lt;=high){
+            if(nums[low]&lt;=nums[high] &amp;&amp; (target&lt;nums[low] || target&gt;nums[high])){
+                return -1;
+            }
+            int mid = (low+high)/2;
+            if(nums[mid] == target) return mid;
+            if(nums[low] &lt; nums[mid] &amp;&amp; target&gt;=nums[low] &amp;&amp; target&lt; nums[mid]){
+                high = mid-1;
+                continue;
+            }
+            if(nums[mid] &lt; nums[high] &amp;&amp; target &lt;=nums[high] &amp;&amp; target &gt;nums[mid]){
+                low = mid+1;
+                continue;
+            }
+            if(nums[low] &gt; nums[mid]){
+                high = mid-1;
+                continue;
+            }
+            if(nums[high] &lt; nums[mid]){
+                low = mid+1;
+                continue;
+            }
+        }
+
+        return -1;
+    }
+};
+
+还是采用分治法的思想，将数组分成两部分，一部分是排好序的，一部分是没排好序的，检查target是否在排好序的数组里面，如果是的话，按经典二分法查找，如果不是继续划分数组。
 </code></pre><h2 id="二进制中1的个数"><a href="#二进制中1的个数" class="headerlink" title="二进制中1的个数"></a>二进制中1的个数</h2><p>输入一个整数，输出该数二进制表示中1的个数。其中负数用补码表示。</p>
 <pre><code>class Solution {
 public:
@@ -1865,6 +1934,191 @@ public:
     }
 };
 </code></pre><p>利用动态规划，f(i)是以i为结尾的子数组的最大和，结果就是max(f(i))。</p>
+<h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><p>对于一个有序数组，我们通常采用二分查找的方式来定位某一元素，请编写二分查找的算法，在数组中查找指定元素。</p>
+<p>给定一个整数数组A及它的大小n，同时给定要查找的元素val，请返回它在数组中的位置(从0开始)，若不存在该元素，返回-1。<strong>若该元素出现多次，请返回第一次出现的位置</strong>。</p>
+<pre><code>class BinarySearch {
+public:
+    int getPos(vector&lt;int&gt; A, int n, int val) {
+        // write code here
+        int low = 0, high = n-1;
+        while(low&lt;high){
+            int mid = (low + high) / 2;
+            if(A[mid] &lt; val) {
+                low = mid + 1;
+            } else if(A[mid] &gt; val) {
+                high = mid - 1;
+            }else {
+                high = mid;
+            }
+        }
+        if(A[low] == val)return low;
+        else return -1;
+
+    }
+};
+</code></pre><p>与经典的二分查找不同，该算法要求返回元素第一次出现的位置，所以稍有区别。</p>
+<h2 id="调整数组顺序使奇数位于偶数前面"><a href="#调整数组顺序使奇数位于偶数前面" class="headerlink" title="调整数组顺序使奇数位于偶数前面"></a>调整数组顺序使奇数位于偶数前面</h2><p>输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。</p>
+<p>如果不需要保证相对位置不变，只需要奇数在前，偶数在后，可以用下面算法实现：</p>
+<pre><code>class Solution {
+public:
+    void reOrderArray(vector&lt;int&gt; &amp;array) {
+        int n = array.size();
+        int p1=0, p2 = n-1;
+
+        while(p2-p1&gt;1){
+            while(array[p1]&amp;1){ //是偶数
+                p1++;
+            }
+            while(!(array[p2]&amp;1)){
+                p2--;
+            }
+            swap(array[p1], array[p2]);
+        }
+
+    }
+};
+</code></pre><h2 id="Odd-Even-Linked-List"><a href="#Odd-Even-Linked-List" class="headerlink" title="Odd Even Linked List"></a>Odd Even Linked List</h2><p>Given a singly linked list, group all odd nodes together followed by the even nodes. Please note here we are talking about the node number and not the value in the nodes.</p>
+<p>You should try to do it in place. The program should run in O(1) space complexity and O(nodes) time complexity.</p>
+<p>Example:</p>
+<pre><code>Given 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL,
+return 1-&gt;3-&gt;5-&gt;2-&gt;4-&gt;NULL.
+</code></pre><p>Note:</p>
+<p>The relative order inside both the even and odd groups should remain as it was in the input. </p>
+<p>The first node is considered odd, the second node even and so on …</p>
+<pre><code>/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* oddEvenList(ListNode* head) {
+        if(!head || !head-&gt;next) return head;
+        ListNode *odd = head;
+        ListNode *even = head-&gt;next;
+        ListNode *evenHead = even;
+        while(odd-&gt;next &amp;&amp; even-&gt;next){
+            odd-&gt;next = even-&gt;next;
+            odd = odd-&gt;next;
+            even-&gt;next = odd-&gt;next;
+            even = even-&gt;next;
+        }
+
+        odd-&gt;next = evenHead;
+        return head;
+    }
+};
+</code></pre><h2 id="链表中倒数第k个结点"><a href="#链表中倒数第k个结点" class="headerlink" title="链表中倒数第k个结点"></a>链表中倒数第k个结点</h2><p>输入一个链表，输出该链表中倒数第k个结点。</p>
+<pre><code>/*
+struct ListNode {
+    int val;
+    struct ListNode *next;
+    ListNode(int x) :
+            val(x), next(NULL) {
+    }
+};*/
+class Solution {
+public:
+    ListNode* FindKthToTail(ListNode* pListHead, unsigned int k) {
+        if(!pListHead)return NULL;
+        ListNode *p1 = pListHead;
+        ListNode *p2 = pListHead;
+        for(int i=0; i&lt;k-1; i++){
+            if(p1-&gt;next){
+                p1 = p1-&gt;next;
+            }
+            else {
+                return NULL;
+            }
+        }
+
+        while(p1-&gt;next){
+            p1 = p1-&gt;next;
+            p2 = p2-&gt;next;
+        }
+
+        return p2;
+    }
+};
+</code></pre><p>定义两个指针，让第一个指针先走k-1步，然后两个指针同时移动，当第一个指针移到最后时，第二个指针指到倒数第k个结点，时间复杂度O(n).</p>
+<h2 id="树的子结构"><a href="#树的子结构" class="headerlink" title="树的子结构"></a>树的子结构</h2><p>输入两棵二叉树A，B，判断B是不是A的子结构。（ps：我们约定空树不是任意一个树的子结构）</p>
+<p>要判断的是 <strong>是不是子结构</strong> 而不是 <strong>是不是子树</strong></p>
+<pre><code>/*
+struct TreeNode {
+    int val;
+    struct TreeNode *left;
+    struct TreeNode *right;
+    TreeNode(int x) :
+            val(x), left(NULL), right(NULL) {
+    }
+};*/
+class Solution {
+public:
+    bool HasSubtree(TreeNode* pRoot1, TreeNode* pRoot2)
+    {
+        bool res = false;
+        while(pRoot1 &amp;&amp; pRoot2){
+            if(pRoot1-&gt;val == pRoot2-&gt;val){
+                res = DoesTree1HasTree2(pRoot1, pRoot2);
+            }
+            if(!res){
+                res = HasSubtree(pRoot1-&gt;left, pRoot2);
+            }
+            if(!res){
+                res = HasSubtree(pRoot1-&gt;right, pRoot2);
+            }
+        }
+        return res;
+    }
+
+    bool DoesTree1HasTree2(TreeNode* pRoot1, TreeNode* pRoot2){
+        if(pRoot1 == NULL &amp;&amp; pRoot2 != NULL) return false;
+        if(pRoot2 == NULL) return true;
+        if(pRoot1-&gt;val != pRoot2-&gt;val)return false;
+        return DoesTree1HasTree2(pRoot1-&gt;left, pRoot2-&gt;left) &amp;&amp; DoesTree1HasTree2(pRoot1-&gt;right, pRoot2-&gt;right);
+    }
+};
+</code></pre><p>两个函数都是递归，要注意第二个函数的返回条件，当pRoot2 == NULL时，证明子结构已经到了叶节点，上面所有结点判断都是true，所以返回true。</p>
+<h2 id="整数中1出现的次数（从1到n整数中1出现的次数）"><a href="#整数中1出现的次数（从1到n整数中1出现的次数）" class="headerlink" title="整数中1出现的次数（从1到n整数中1出现的次数）"></a>整数中1出现的次数（从1到n整数中1出现的次数）</h2><p>求出1~13的整数中1出现的次数,并算出100~1300的整数中1出现的次数？为此他特别数了一下1~13中包含1的数字有1、10、11、12、13因此共出现6次,但是对于后面问题他就没辙了。ACMer希望你们帮帮他,并把问题更加普遍化,可以很快的求出任意非负整数区间中1出现的次数。</p>
+<pre><code>class Solution {
+public:
+    int NumberOf1Between1AndN_Solution(int n)
+    {
+        int cnt = 0;
+        int factor = 1;
+        int lowerNum = 0;
+        int currNum = 0;
+        int higherNum = 0;
+
+        while(n/factor != 0){
+            lowerNum = n - (n/factor) * factor;
+            currNum = (n/factor) % 10;
+            higherNum = n/(factor*10);
+
+            switch(currNum){
+                case 0:
+                    cnt+=higherNum * factor;
+                    break;
+                case 1:
+                    cnt+=higherNum*factor + lowerNum+1;
+                    break;
+                default:
+                    cnt+=(higherNum+1) * factor;
+
+            }
+
+            factor *= 10;
+        }
+
+        return cnt;
+    }
+
+
+};
+</code></pre><p>编程之美P132上有解析。</p>
 
       
     </div>
@@ -1971,7 +2225,7 @@ public:
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -2014,7 +2268,7 @@ public:
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-String"><span class="nav-number">1.</span> <span class="nav-text">Reverse String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nim-Game"><span class="nav-number">2.</span> <span class="nav-text">Nim Game</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number"><span class="nav-number">3.</span> <span class="nav-text">Single Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-Digits"><span class="nav-number">4.</span> <span class="nav-text">Add Digits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maximum-Depth-of-Binary-Tree"><span class="nav-number">5.</span> <span class="nav-text">Maximum Depth of Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-Linked-List"><span class="nav-number">6.</span> <span class="nav-text">Reverse Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Counting-Bits"><span class="nav-number">7.</span> <span class="nav-text">Counting Bits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Invert-Binary-Tree"><span class="nav-number">8.</span> <span class="nav-text">Invert Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sum-of-Two-Integers"><span class="nav-number">9.</span> <span class="nav-text">Sum of Two Integers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number-III"><span class="nav-number">10.</span> <span class="nav-text">Single Number III</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Move-Zeroes"><span class="nav-number">11.</span> <span class="nav-text">Move Zeroes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Intersection-of-Two-Arrays"><span class="nav-number">12.</span> <span class="nav-text">Intersection of Two Arrays</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Delete-Node-in-a-Linked-List"><span class="nav-number">13.</span> <span class="nav-text">Delete Node in a Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Product-of-Array-Except-Self"><span class="nav-number">14.</span> <span class="nav-text">Product of Array Except Self</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Same-Tree"><span class="nav-number">15.</span> <span class="nav-text">Same Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Excel-Sheet-Column-Title"><span class="nav-number">16.</span> <span class="nav-text">Excel Sheet Column Title</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Valid-Anagram"><span class="nav-number">17.</span> <span class="nav-text">Valid Anagram</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fizz-Buzz"><span class="nav-number">18.</span> <span class="nav-text">Fizz Buzz</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maximum-Subarray"><span class="nav-number">19.</span> <span class="nav-text">Maximum Subarray</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Repeated-Substring-Pattern"><span class="nav-number">20.</span> <span class="nav-text">Repeated Substring Pattern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Climbing-Stairs"><span class="nav-number">21.</span> <span class="nav-text">Climbing Stairs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hamming-Distance"><span class="nav-number">22.</span> <span class="nav-text">Hamming Distance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Path-Sum"><span class="nav-number">23.</span> <span class="nav-text">Path Sum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Path-Sum-II"><span class="nav-number">24.</span> <span class="nav-text">Path Sum II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ugly-Number"><span class="nav-number">25.</span> <span class="nav-text">Ugly Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ugly-Number-II"><span class="nav-number">26.</span> <span class="nav-text">Ugly Number II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lowest-Common-Ancestor-of-a-Binary-Search-Tree"><span class="nav-number">27.</span> <span class="nav-text">Lowest Common Ancestor of a Binary Search Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Tree-Level-Order-Traversal-II"><span class="nav-number">28.</span> <span class="nav-text">Binary Tree Level Order Traversal II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Tree-Inorder-Traversal"><span class="nav-number">29.</span> <span class="nav-text">Binary Tree Inorder Traversal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#House-Robber"><span class="nav-number">30.</span> <span class="nav-text">House Robber</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#House-Robber-II"><span class="nav-number">31.</span> <span class="nav-text">House Robber II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Number-Complement"><span class="nav-number">32.</span> <span class="nav-text">Number Complement</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Max-Consecutive-Ones"><span class="nav-number">33.</span> <span class="nav-text">Max Consecutive Ones</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Island-Perimeter"><span class="nav-number">34.</span> <span class="nav-text">Island Perimeter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Find-All-Numbers-Disappeared-in-an-Array"><span class="nav-number">35.</span> <span class="nav-text">Find All Numbers Disappeared in an Array</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Construct-the-Rectangle"><span class="nav-number">36.</span> <span class="nav-text">Construct the Rectangle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Search-a-2D-Matrix"><span class="nav-number">37.</span> <span class="nav-text">Search a 2D Matrix</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#替换空格"><span class="nav-number">38.</span> <span class="nav-text">替换空格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重建二叉树"><span class="nav-number">39.</span> <span class="nav-text">重建二叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implement-Queue-using-Stacks"><span class="nav-number">40.</span> <span class="nav-text">Implement Queue using Stacks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implement-Stack-using-Queues"><span class="nav-number">41.</span> <span class="nav-text">Implement Stack using Queues</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速排序"><span class="nav-number">42.</span> <span class="nav-text">快速排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Find-Minimum-in-Rotated-Sorted-Array"><span class="nav-number">43.</span> <span class="nav-text">Find Minimum in Rotated Sorted Array</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二进制中1的个数"><span class="nav-number">44.</span> <span class="nav-text">二进制中1的个数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数值的整数次方"><span class="nav-number">45.</span> <span class="nav-text">数值的整数次方</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maximum-Subarray-1"><span class="nav-number">46.</span> <span class="nav-text">Maximum Subarray</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-String"><span class="nav-number">1.</span> <span class="nav-text">Reverse String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nim-Game"><span class="nav-number">2.</span> <span class="nav-text">Nim Game</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number"><span class="nav-number">3.</span> <span class="nav-text">Single Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-Digits"><span class="nav-number">4.</span> <span class="nav-text">Add Digits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maximum-Depth-of-Binary-Tree"><span class="nav-number">5.</span> <span class="nav-text">Maximum Depth of Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-Linked-List"><span class="nav-number">6.</span> <span class="nav-text">Reverse Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Counting-Bits"><span class="nav-number">7.</span> <span class="nav-text">Counting Bits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Invert-Binary-Tree"><span class="nav-number">8.</span> <span class="nav-text">Invert Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sum-of-Two-Integers"><span class="nav-number">9.</span> <span class="nav-text">Sum of Two Integers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number-III"><span class="nav-number">10.</span> <span class="nav-text">Single Number III</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Move-Zeroes"><span class="nav-number">11.</span> <span class="nav-text">Move Zeroes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Intersection-of-Two-Arrays"><span class="nav-number">12.</span> <span class="nav-text">Intersection of Two Arrays</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Delete-Node-in-a-Linked-List"><span class="nav-number">13.</span> <span class="nav-text">Delete Node in a Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Product-of-Array-Except-Self"><span class="nav-number">14.</span> <span class="nav-text">Product of Array Except Self</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Same-Tree"><span class="nav-number">15.</span> <span class="nav-text">Same Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Excel-Sheet-Column-Title"><span class="nav-number">16.</span> <span class="nav-text">Excel Sheet Column Title</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Valid-Anagram"><span class="nav-number">17.</span> <span class="nav-text">Valid Anagram</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fizz-Buzz"><span class="nav-number">18.</span> <span class="nav-text">Fizz Buzz</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maximum-Subarray"><span class="nav-number">19.</span> <span class="nav-text">Maximum Subarray</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Repeated-Substring-Pattern"><span class="nav-number">20.</span> <span class="nav-text">Repeated Substring Pattern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Climbing-Stairs"><span class="nav-number">21.</span> <span class="nav-text">Climbing Stairs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hamming-Distance"><span class="nav-number">22.</span> <span class="nav-text">Hamming Distance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Path-Sum"><span class="nav-number">23.</span> <span class="nav-text">Path Sum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Path-Sum-II"><span class="nav-number">24.</span> <span class="nav-text">Path Sum II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ugly-Number"><span class="nav-number">25.</span> <span class="nav-text">Ugly Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ugly-Number-II"><span class="nav-number">26.</span> <span class="nav-text">Ugly Number II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lowest-Common-Ancestor-of-a-Binary-Search-Tree"><span class="nav-number">27.</span> <span class="nav-text">Lowest Common Ancestor of a Binary Search Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Tree-Level-Order-Traversal-II"><span class="nav-number">28.</span> <span class="nav-text">Binary Tree Level Order Traversal II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Tree-Inorder-Traversal"><span class="nav-number">29.</span> <span class="nav-text">Binary Tree Inorder Traversal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#House-Robber"><span class="nav-number">30.</span> <span class="nav-text">House Robber</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#House-Robber-II"><span class="nav-number">31.</span> <span class="nav-text">House Robber II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Number-Complement"><span class="nav-number">32.</span> <span class="nav-text">Number Complement</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Max-Consecutive-Ones"><span class="nav-number">33.</span> <span class="nav-text">Max Consecutive Ones</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Island-Perimeter"><span class="nav-number">34.</span> <span class="nav-text">Island Perimeter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Find-All-Numbers-Disappeared-in-an-Array"><span class="nav-number">35.</span> <span class="nav-text">Find All Numbers Disappeared in an Array</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Construct-the-Rectangle"><span class="nav-number">36.</span> <span class="nav-text">Construct the Rectangle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Search-a-2D-Matrix"><span class="nav-number">37.</span> <span class="nav-text">Search a 2D Matrix</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#替换空格"><span class="nav-number">38.</span> <span class="nav-text">替换空格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重建二叉树"><span class="nav-number">39.</span> <span class="nav-text">重建二叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implement-Queue-using-Stacks"><span class="nav-number">40.</span> <span class="nav-text">Implement Queue using Stacks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implement-Stack-using-Queues"><span class="nav-number">41.</span> <span class="nav-text">Implement Stack using Queues</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速排序"><span class="nav-number">42.</span> <span class="nav-text">快速排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Find-Minimum-in-Rotated-Sorted-Array"><span class="nav-number">43.</span> <span class="nav-text">Find Minimum in Rotated Sorted Array</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Search-in-Rotated-Sorted-Array"><span class="nav-number">44.</span> <span class="nav-text">Search in Rotated Sorted Array</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二进制中1的个数"><span class="nav-number">45.</span> <span class="nav-text">二进制中1的个数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数值的整数次方"><span class="nav-number">46.</span> <span class="nav-text">数值的整数次方</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maximum-Subarray-1"><span class="nav-number">47.</span> <span class="nav-text">Maximum Subarray</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二分查找"><span class="nav-number">48.</span> <span class="nav-text">二分查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调整数组顺序使奇数位于偶数前面"><span class="nav-number">49.</span> <span class="nav-text">调整数组顺序使奇数位于偶数前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Odd-Even-Linked-List"><span class="nav-number">50.</span> <span class="nav-text">Odd Even Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链表中倒数第k个结点"><span class="nav-number">51.</span> <span class="nav-text">链表中倒数第k个结点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树的子结构"><span class="nav-number">52.</span> <span class="nav-text">树的子结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整数中1出现的次数（从1到n整数中1出现的次数）"><span class="nav-number">53.</span> <span class="nav-text">整数中1出现的次数（从1到n整数中1出现的次数）</span></a></li></ol></div>
             
           </div>
         </section>

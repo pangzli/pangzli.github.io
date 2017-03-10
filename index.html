@@ -650,6 +650,307 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/21/JS知识点碎片 #/" itemprop="url">
+                  JS知识点碎片
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-21T00:00:00+08:00" content="2016-09-21">
+              2016-09-21
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/21/JS知识点碎片 #/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/21/JS知识点碎片 #/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+		  
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<p>1、当var x = new Boolean(false)时，if（x）此时，x为一个Boolean对象，结果为true；<br>      当var y = Boolean(0)时，if（y）此时，结果为false。</p>
+<p>2、</p>
+<ul>
+<li>hasOwnProperty用来判断一个对象是否有给出名称的属性或者对象（单个对象，不是原型链上的）;</li>
+<li>hasPrototypeProperty是用来检测原型对象上的属性；</li>
+<li>isPrototypeOf用来判断是否是给定对象的原型</li>
+</ul>
+<p>3、Number（null）会返回0</p>
+<p>4、JavaScript中，字符串连接用Array.join()性能会提高很多</p>
+<p>5、</p>
+<pre><code>function foo(){
+    console.log(‘first’);
+    setTimeout({
+        console.log(’second’);
+    },5);
+}
+for(var I=0; I&lt;439999999999; I++){
+    foo();
+}
+</code></pre><p>结果会是先输出所有的first，再输出剩下的second，考察的回调的运行机制，回调时，被回调的函数会被放在event loop中，等待线程里的任务执行完后才执行event loop里的代码。</p>
+<p>6、</p>
+<ul>
+<li>js基本数据类型 String Number Boolean Null Undefined</li>
+<li>复杂数据类型 Object Function Array RegExp Date Error</li>
+</ul>
+<p>7、console.log(null == undefined) true</p>
+<p>8、</p>
+<pre><code>* 填写内容让下面代码支持a.name = “name1”; b.name = “name2”; 
+* var b = new obj;
+* function obj(name){ 
+*     1 if(name){ this.name = name;}return this;
+* } 
+* obj. 2 = &quot;name2&quot;; prototype.name
+* var a = obj(&quot;name1&quot;); 
+
+
+
+解答：
+function obj(name){
+    if(name){
+        this.name = name;
+    }
+    return this;
+}
+obj.prototype.name = &quot;name2&quot;;
+var a = obj(&quot;name1&quot;);
+var b = new obj;
+
+console.log(a.name); // name1
+console.log(window.name); // name1
+console.log(b.name); // name2
+
+//一般函数直接调用，默认this执行全局window|global
+//通过obj(&apos;name1&apos;)调用，返回this引用，并传给a, 此时a等于window对象，即可输出属性name值
+
+//new操作， new obj 等价于 new obj() ,实例化一个对象，这时this指向obj,要拿到b.name的值
+//需要保证name属性存在，属性查找原则是先查找当前实例有没有属性，如果有就直接使用，如果没有就到原型上面找，再没有就接着原型链一步一步，这里为了和a.name作属性区别，使用了if(name)有条件地构建this的属性name
+//所以，现在实例name属性提供给a使用，原型上的name提供给b使用。
+
+//两个变体
+function obj(name){
+    //if(name){
+        this.name = name;
+    //}
+    return this;
+}
+obj.prototype.name = &quot;name2&quot;;
+var a = obj(&quot;name1&quot;);
+var b = new obj;
+
+console.log(a.name);//name1
+console.log(window.name);//name1
+console.log(b.name);//undefined
+// 这时b实例已经有属性name，但参数name为undefined ,所以
+// 这时可以把，this.name属性删掉，这样就能去原型找name了
+function obj(name){
+    //if(name){
+        this.name = name;
+    //}
+    return this;
+}
+obj.prototype.name = &quot;name2&quot;;
+var a = obj(&quot;name1&quot;);
+var b = new obj;
+
+console.log(a.name);//name1
+console.log(window.name);//name1
+delete b.name;
+console.log(b.name);//name2
+
+
+// 再试试 new obj(&apos;myName&apos;) 传个参数
+function obj(name){
+    //if(name){
+        this.name = name;
+    //}
+    return this;
+}
+obj.prototype.name = &quot;name2&quot;;
+var a = obj(&quot;name1&quot;);
+var b = new obj(&apos;myName&apos;);
+
+console.log(a.name);//name1
+console.log(window.name);//name1
+console.log(b.name);//myName
+</code></pre><p>9、</p>
+<pre><code>在前提：var arr =[1,3,2]下，下面哪个操作会返回一个数组，并且不是arr？
+正确答案: C   你的答案: A (错误)
+</code></pre><ul>
+<li>arr.push(3)</li>
+<li>arr.reverse()</li>
+<li>[].concat.call(arr,[])</li>
+<li>[].sort.call(arr)</li>
+</ul>
+<p>arr是个对象数组，reverse和sort只是改了arr的内容，返回的依然是arr对象本身，而concat返回的是新的对象，这里考的点是浅拷贝和深度拷贝，concat和slice常用来做深度拷贝</p>
+<p>10、 splice和slice的区别 </p>
+<p>slice方法是返回指定数组的一个片段或子数组。它的两个参数分别指定了开始和结束的位置。如果只指定第一个参数，是从这个位置到结束，如果第二个参数是负数，-1代表倒数第一个，-3代表倒数第三个。slice()方法并不会改变被调用的数组。</p>
+<p>splice()方法是在数组中插入或删除元素的通用方法。会修改调用的数组。</p>
+<pre><code>var a = [1,2,3,4,5,6,7,8];
+a.splice(4); // 返回[5,6,7,8]，a是[1,2,3,4]
+a.splice(1,2); // 返回[2,3]，a是[1,4]
+a.splice(1,1); // 返回[4], a是[1]
+</code></pre><p>splice()的前两个参数指定了需要删除的数组元素，紧随其后的任意个数参数指定了需要插入到数组中的元素，从第一个参数指定的位置开始插入。</p>
+<pre><code>var a = [1,2,3,4,5];
+a.splice(2,0,&apos;a&apos;,&apos;b&apos;); // 返回[], a是[1,2,&apos;a&apos;,&apos;b&apos;,3,4,5];
+a.splice(2,2,[1,2],3); // 返回[&apos;a&apos;,&apos;b&apos;], a是[1,2,[1,2],3,3,4,5];
+</code></pre><p>区别于concat，splice()会插入数组本身而非数组的元素。</p>
+<p>11、 除以0不会报错，正数除以0显示Infinity、负数除以0显示-Infinity，0/0显示NaN。</p>
+<p>NaN != NaN</p>
+<p>12、在JS中0.3 - 0.2 并不等于 0.1, 语言特性，但可以精确表示分数，类似1/2、1/4、1/8和1/1024。</p>
+<p>13、对null执行typeof运算，结果返回字符串‘object’</p>
+<p>对undefined执行typeof运算，结果返回字符串‘undefined’</p>
+<pre><code>null == undefined
+null !== undefined
+</code></pre><p>null和undefined都不包含任何属性和方法。</p>
+<p>14、</p>
+<pre><code>var s = &apos;test&apos;;
+s.len = 4;
+console.log(s.len) // undefined
+</code></pre><p>当对原始变量存取属性时，会调用new String（s）转化成对象，来处理属性引用，一旦属性引用结束，这个新创建的对象就会销毁。</p>
+<p>字符串、数字、布尔值都是只读的，并且不能给它们添加新属性。</p>
+<p>15、所有对象转换成布尔值都是true</p>
+<p>undefined转换成数字是NaN</p>
+<p>parseInt或者parseFloat如果第一个非空格自复式非法的数字直接量，则最终返回NaN。</p>
+<p>16、</p>
+<pre><code>var n = 1 - &quot;x&quot;; // NaN
+n + &quot; objects&quot; // &quot;NaN objects&quot;
+</code></pre><p>17、属性访问表达式和调用表达式的优先级要比所有的运算符都要高。</p>
+<pre><code>typeof my.functions[x](y)
+</code></pre><p>尽管typeof的是优先级最高的运算符之一，但typeof也是在两次属性访问和函数调用之后执行的。</p>
+<p>18、对 “===”：</p>
+<ul>
+<li>如果两个值都是null或者都是undefined，它们不相等。</li>
+<li>如果其中一个是NaN，或者两个都是NaN，不相等。</li>
+<li>-0和0相等</li>
+</ul>
+<p>19、</p>
+<pre><code>&quot;11&quot; &lt; &quot;3&quot; // true,字符串比较
+&quot;one&quot; &lt; 3 // 数字的比较，&quot;one&quot;转换成NaN，结果为false
+</code></pre><p>如果其中一个操作数是NaN，那么比较操作符总是返回false。</p>
+<p>20、eval()只有一个参数，如果参数不是字符串，直接返回这个参数，如果参数是字符串，他会把字符串当成JavaScript代码进行编译，如果编译失败则抛出一个语法错误异常。如果编译成功，则开始执行这段代码，并返回字符串中的最后一个表达式或语句的纸，如果最后一个表达式或语句没有值，则最终返回undefined。</p>
+<p>21、</p>
+<pre><code>typeof(null) // &apos;object&apos;
+typeof(true) // &apos;boolean&apos;
+typeof(任意数字或者NaN) // &apos;number&apos;
+</code></pre><p>typeof运算符可以带上圆括号，这让它看起来像一个函数名，而不是一个运算符关键字。</p>
+<p>22、JavaScript没有块级作用域。</p>
+<p>23、</p>
+<pre><code>var o = {
+    x: 1,
+    y: 2,
+    z: 3
+};
+
+var a = [],i=0;
+for(a[i++] in o);
+for(i in a)console.log(a[i]);
+</code></pre><p>结果打印为x、y、z，在for/in语句中，variable的值可以当做赋值表达式的左值。</p>
+<p>for/in会遍历对象的所有可枚举的属性。</p>
+<p>24、将伪数组变为真正的数组，类似arguments</p>
+<pre><code>Array.prototype.slice.call(arguments);
+
+ES6里from方法  Array.from(arguments);
+</code></pre><p>25、函数对象可以通过作用域链相互关联起来，函数体内部的变量都可以保存在函数作用域内，这种特性叫做“闭包”。</p>
+<p>26、实现闭包</p>
+<p>如果你理解了词法作用域的规则，你就很容易理解闭包：函数定义时的作用域链到函数调用时依然有效。然而很多程序员觉得闭包非常难理解，因为他们在深入学习闭包的实现细节时将自己搞得晕头转向。他们觉得在外部函数中定义的局部变量在函数返回时就不存在了，那么嵌套的函数如何能调用不存在的作用域链呢？如果你想搞清楚这个问题，你需要深入的了解类似C语言这种更底层的编程语言，并了解基于栈的CPU架构：如果一个函数的局部变量定义在CPU的栈中，那么当函数返回时它们的确不存在了。</p>
+<p>但回想一下是如何定义作用域链的。我们将作用域链描述成一个对象列表，而不是绑定的栈。每次调用JavaScript函数的时候，都会为之创建一个新的对象用来保存局部变量，把这个对象添加到作用域链中。当函数返回时，就从作用域链中将这个绑定变量的对象删除。如果不存在嵌套的函数，也没有其他引用指向这个绑定对象，它就会被当做垃圾回收掉。如果定义了嵌套的函数，每个嵌套函数都各自对应一个作用域链，并且这个作用域链指向一个变量绑定对象。但如果这些嵌套的函数对象在外部函数中保存下来，那么它们也会和所指向的变量绑定对象一样被当做垃圾回收。但是如果这个函数定义了嵌套的函数，并将它作为返回值返回或者存储在某处的属性里，这时就会有一个外部引用指向这个嵌套的函数，它就不会被当做垃圾回收，并且所指向的变量绑定对象也不会被当作垃圾回收。</p>
+<p>27、判断一个JavaScript对象的类</p>
+<pre><code>Object.prototype.toString.call(o)
+
+[object Object]
+[object Function]
+[object String]
+[object Number]
+[object Boolean]
+[objeac Date]
+[object Regexp]
+[object Null]
+[object Undefined]
+[object Window]
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/09/11/bootstrap/" itemprop="url">
                   bootstrap库简单使用中遇到的一些问题
                 </a>
@@ -1186,7 +1487,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
