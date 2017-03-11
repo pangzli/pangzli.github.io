@@ -92,7 +92,7 @@
 <meta property="og:description" content="Ajax(Asynchronous JavaScript and XML),异步的JavaScript与XML.">
 <meta property="og:image" content="http://i4.buimg.com/567571/aa960010b80ffd66.png">
 <meta property="og:image" content="http://i4.buimg.com/567571/d5f5c0a0f9c2c2a2.png">
-<meta property="og:updated_time" content="2016-09-06T12:34:54.000Z">
+<meta property="og:updated_time" content="2017-03-11T16:34:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ajax相关">
 <meta name="twitter:description" content="Ajax(Asynchronous JavaScript and XML),异步的JavaScript与XML.">
@@ -336,7 +336,7 @@ xhr.send(null);
 <p>而某些提交需要保密的内容(如帐号密码)或者需要提交的参数特别多时,此时需要使用post方式提交,这时原生的Ajax与get方式的Ajax有一定的差别.</p>
 <pre><code>var msg = document.getElementById(&quot;msg&quot;);
 
- // 准备好要post的数据
+// 准备好要post的数据
 var name = document.getElementById(&quot;txtName&quot;).value;
 var pwd = document.getElementById(&quot;txtPwd&quot;).value;
 var data = &quot;username=&quot;+ name +&quot;&amp;passw=&quot;+ pwd;
@@ -477,6 +477,37 @@ callback:&quot;&quot;
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre><p><img src="http://i4.buimg.com/567571/aa960010b80ffd66.png" alt=""><br><img src="http://i4.buimg.com/567571/d5f5c0a0f9c2c2a2.png" alt=""></p>
+<h2 id="常见的HTTP状态"><a href="#常见的HTTP状态" class="headerlink" title="常见的HTTP状态"></a>常见的HTTP状态</h2><p>首先需要了解1~5开头的HTTP状态码分别是什么含义：</p>
+<ul>
+<li>1XX  表示消息</li>
+<li>2XX  表示成功</li>
+<li>3XX  表示重定向</li>
+<li>4XX  表示请求错误</li>
+<li>5XX  表示服务器端错误</li>
+</ul>
+<p>具体常见的HTTP状态码：</p>
+<ul>
+<li>200 OK</li>
+<li><p>301 Moved Permanently 重定向</p>
+<p>  客户请求的文档在其他地方，新的URL在Location头中给出，浏览器应该自动地访问新的URL。*</p>
+</li>
+<li><p>302 Found 临时重定向</p>
+<p>  临时重定向，类似于301，但新的URL应该被视为临时性的替代，而不是永久性的。</p>
+</li>
+<li><p>304 Not Modified</p>
+<p>  客户端有缓冲的文档并发出了一个条件性的请求。服务器告诉客户，原来缓冲的文档还可以继续使用。</p>
+</li>
+<li><p>400 Bad Request 请求出现语法错误。</p>
+</li>
+<li>403 Forbidden 资源不可用。</li>
+<li>404 Not Found 无法找到指定位置的资源。</li>
+<li><p>500 Internal Server Error</p>
+<p>  服务器遇到了意料不到的情况，不能完成客户的请求。</p>
+</li>
+<li><p>501 Not Implemented</p>
+<p>  服务器不支持实现请求所需要的功能。</p>
+</li>
+</ul>
 
       
     </div>
@@ -583,7 +614,7 @@ callback:&quot;&quot;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">11</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -626,7 +657,7 @@ callback:&quot;&quot;
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ajax基本介绍"><span class="nav-number">1.</span> <span class="nav-text">Ajax基本介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get和post两种情况的原生Ajax"><span class="nav-number">2.</span> <span class="nav-text">get和post两种情况的原生Ajax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery封装的Ajax"><span class="nav-number">3.</span> <span class="nav-text">jQuery封装的Ajax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jsonp"><span class="nav-number">4.</span> <span class="nav-text">jsonp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#artTemplate"><span class="nav-number">5.</span> <span class="nav-text">artTemplate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个模仿百度首页的例子"><span class="nav-number">6.</span> <span class="nav-text">一个模仿百度首页的例子</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ajax基本介绍"><span class="nav-number">1.</span> <span class="nav-text">Ajax基本介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get和post两种情况的原生Ajax"><span class="nav-number">2.</span> <span class="nav-text">get和post两种情况的原生Ajax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery封装的Ajax"><span class="nav-number">3.</span> <span class="nav-text">jQuery封装的Ajax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jsonp"><span class="nav-number">4.</span> <span class="nav-text">jsonp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#artTemplate"><span class="nav-number">5.</span> <span class="nav-text">artTemplate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个模仿百度首页的例子"><span class="nav-number">6.</span> <span class="nav-text">一个模仿百度首页的例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的HTTP状态"><span class="nav-number">7.</span> <span class="nav-text">常见的HTTP状态</span></a></li></ol></div>
             
           </div>
         </section>
