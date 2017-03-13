@@ -1,0 +1,717 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="React学习记录。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React学习记录">
+<meta property="og:url" content="http://yoursite.com/2017/01/18/React/index.html">
+<meta property="og:site_name" content="胖子李">
+<meta property="og:description" content="React学习记录。">
+<meta property="og:updated_time" content="2017-03-13T15:51:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React学习记录">
+<meta name="twitter:description" content="React学习记录。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/01/18/React/"/>
+
+  <title> React学习记录 | 胖子李 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?0e848dc3bf106cbfb59929b6254ac0d0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">胖子李</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一个人的命运啊，当然要靠自我奋斗。但是，也要考虑到历史的行程。（手动滑稽</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                React学习记录
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-18T00:00:00+08:00" content="2017-01-18">
+              2017-01-18
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/18/React/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/18/React/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+		  
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>React学习记录。</p>
+<a id="more"></a>
+<p><a href="http://www.ruanyifeng.com/blog/2015/02/mvcmvp_mvvm.html" target="_blank" rel="external">MVC，MVP 和 MVVM 的图示</a></p>
+<p>MVC最为常见，在iOS开发里，基本都是MVC开发。<br>MVVM类似于ng和vue，数据双向绑定。</p>
+<p>React不是完整的MVC/MVVM框架，而像是一个View框架，而又与模板引擎不同，React不仅专注于解决View层的问题，又是一个包括View和Controller的库。对于复杂的应用，可以根据应用场景来选择业务层框架，并根据需要搭配Flux、Redux来使用。</p>
+<h2 id="JSX"><a href="#JSX" class="headerlink" title="JSX"></a>JSX</h2><p>JSX是React的重要语法，很方便的实现组件的复用，也保证了组建的结构清晰。</p>
+<p>JSX是一门静态编译语言。</p>
+<p>React是用过创建于更新虚拟元素来管理整个Virtual DOM的，其中虚拟元素可以理解为真实元素的对应，它的构建和更新都是在内存中完成的，并不会渲染到DOM中去。在React中创建的虚拟元素可以分为两类，DOM元素和组件元素，分别对应原生DOM元素和自定义元素，而JSX与创建元素的过程有着莫大的关联。</p>
+<p>定义标签时，只允许被一个标签包裹，原因是一个标签会被转译成对应的React.createElement调用方法，最外层没有被包裹，显然没有办法转译成方法调用。并且标签一定要闭合。</p>
+<h2 id="Vitural-DOM"><a href="#Vitural-DOM" class="headerlink" title="Vitural DOM"></a>Vitural DOM</h2><p>DOM操作是非常昂贵的，性能消耗最大的就是DOM操作，并且这部分代码也会变得难以维护，React把真实的DOM树转换成JavaScript对象树，也就是Vitrual DOM。</p>
+<p>每次数据更新后，重新计算Virtual DOM树，并和上一次生成的Virtual DOM做对比，对发生变化的部分作批量更新。React提供了直观的shouleComponentUpdate生命周期回调，来减少数据变化后不必要的Virtual DOM对比过程，来保证性能。</p>
+<p>而且正是由于Virtual DOM，react-native可以将React组件映射成对应的原生控件。</p>
+<h2 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h2><p>lambda演算，函数式编程是React的精髓，将不断重复构建UI的过程抽象成组件，且在给定参数的情况下约定渲染对应的UI界面。React能充分利用很多函数式方法去减少冗余代码。</p>
+<h2 id="React-组件"><a href="#React-组件" class="headerlink" title="React 组件"></a>React 组件</h2><p>React的本质就是关心元素的构成，React组件即为组件元素，组件元素被描述成纯粹的JSON对象。</p>
+<p>React组件基本上由三个部分组成——props、state以及生命周期。</p>
+<p>React组件可以接受参数，也可以有自身状态，一旦接受到的参数或自身状态有所改变，React组件就会执行相应的生命周期方法，最后渲染。</p>
+<h3 id="React组件的构建方法"><a href="#React组件的构建方法" class="headerlink" title="React组件的构建方法"></a>React组件的构建方法</h3><h4 id="React-createClass"><a href="#React-createClass" class="headerlink" title="React.createClass"></a>React.createClass</h4><pre><code>const Button = React.creatClass({
+    getDefaultProps(){
+        return {
+            color: &apos;blue&apos;,
+            text: &apos;Confirm&apos;
+        }
+    },
+
+    render(){
+        const {color, text} = this.props;
+        return (
+            &lt;button className = {`btn btn-&amp;{color}`}&gt;
+                &lt;em&gt;{text}&lt;/em&gt;
+            &lt;/button&gt;
+        );
+    }
+});
+</code></pre><h4 id="ES6-classes"><a href="#ES6-classes" class="headerlink" title="ES6 classes"></a>ES6 classes</h4><pre><code>import React from &apos;react&apos;;
+
+class Button extends React.component{
+    constructor(props){
+        super(props);
+    }
+
+    statis dafualtProps = {
+        color: &apos;blue&apos;,
+        text: &apos;Confirm&apos;
+    }
+
+    render(){
+        const {color, text} = this.props;
+        return (
+            &lt;button className = {`btn btn-&amp;{color}`}&gt;
+                &lt;em&gt;{text}&lt;/em&gt;
+            &lt;/button&gt;
+        );
+    }
+}
+</code></pre><h4 id="无状态函数"><a href="#无状态函数" class="headerlink" title="无状态函数"></a>无状态函数</h4><p>无状态组件只传入props和context两个参数，不存在state，也没有生命周期方法，组件本身即上面两种方法中的render方法。</p>
+<p>无状态组件不像上述方法在调用时会创建新实例，他始终保持了一个实例，避免了不必要的检查和内存分配。</p>
+<h2 id="在React中绑定事件bind-this"><a href="#在React中绑定事件bind-this" class="headerlink" title="在React中绑定事件bind(this)"></a>在React中绑定事件bind(this)</h2><p>在使用React中 如果使用ES6的Class extends写法 如果onClick绑定一个方法 需要bind(this),<br>而使用React.createClass方法 就不需要. </p>
+<p>React.createClass 是es5的写法默认是绑定了bind方法，而es6中 新增加了class，绑定的方法需要绑定this，如果是箭头函数就不需要绑定this，用箭头的方式</p>
+<p>bind() 最简单的用法是创建一个函数，使这个函数不论怎么调用都有同样的 this 值。JavaScript新手经常犯的一个错误是将一个方法从对象中拿出来，然后再调用，希望方法中的 this 是原来的对象。（比如在回调中传入这个方法。）如果不做特殊处理的话，一般会丢失原来的对象。从原来的函数和原来的对象创建一个绑定函数，则能很漂亮地解决这个问题：</p>
+<pre><code>this.x = 9; 
+var module = {
+  x: 81,
+  getX: function() { return this.x; }
+};
+
+module.getX(); // 返回 81
+
+var retrieveX = module.getX;
+retrieveX(); // 返回 9, 在这种情况下，&quot;this&quot;指向全局作用域
+
+// 创建一个新函数，将&quot;this&quot;绑定到module对象
+var boundGetX = retrieveX.bind(module);
+boundGetX(); // 返回 81
+</code></pre><p>结合这里的例子进行理解，React构造方法中的bind即将handleClick函数与这个组件Component进行绑定以确保在这个处理函数中使用this时可以时刻指向这一组件。</p>
+<h2 id="React数据流"><a href="#React数据流" class="headerlink" title="React数据流"></a>React数据流</h2><p>在React中，数据都是自顶向下单向流动的，即从父组件到子组件。这条原则让组件之间的关系变得简单且可预测。        </p>
+<p>把组件看成一个函数，那么他接受了props作为参数，内部由state作为函数的内部参数，返回一个VDOM的实现。</p>
+<h3 id="state"><a href="#state" class="headerlink" title="state"></a>state</h3><p>调用setState方法，会尝试将该组件重新渲染。</p>
+<h3 id="props"><a href="#props" class="headerlink" title="props"></a>props</h3><p>React是单项数据流，主要的流动管道就是props。props本身是不可变的，当我们试图改变props的原始值时，React会报出类型错误的警告，组建的props一定来自于默认属性或者通过父组件传递过来。</p>
+<h4 id="用function-prop-与父组件通信"><a href="#用function-prop-与父组件通信" class="headerlink" title="用function prop 与父组件通信"></a>用function prop 与父组件通信</h4><p>相关代码</p>
+<pre><code>handleTabClick(activeIndex){
+    //...
+    this.props.onChange({activeIndex, prevIndex});
+}
+</code></pre><p>我们通过点击事件handleTabClick触发了onChange prop毁掉函数给父组件必要的值。</p>
+<h4 id="propTypes"><a href="#propTypes" class="headerlink" title="propTypes"></a>propTypes</h4><p>由于JavaScript不是强类型语言，便有了propTypes来解决开发的约束问题。</p>
+<p>propTypes用于规范props的类型与必须的状态，如果组件定义了propTypes，那么在开发环境下，就会对组件的props值的类型做检查，如果传入的props不能与之匹配，React就会实时在控制台报warning。</p>
+<pre><code>static PropTypes = {
+      imgsArrangeArr: PropTypes.array,
+      imageData: PropTypes.array,
+      stage: PropTypes.object
+  }
+</code></pre><h2 id="React生命周期"><a href="#React生命周期" class="headerlink" title="React生命周期"></a>React生命周期</h2><h3 id="组件挂载、卸载"><a href="#组件挂载、卸载" class="headerlink" title="组件挂载、卸载"></a>组件挂载、卸载</h3><p>componentWillMount //可以执行setState,但是没有意义</p>
+<p>componentDidMount //可以执行setState，但是初始化过程就渲染了两次组件，这并不是一件好事，但实际情况是没有一些场景不得不需要setState，比如计算机组件的位置或宽高时，就不得不让组件先渲染，更新必要的信息后再次渲染。</p>
+<p>componentWillUnmount //执行一些清理方法，比如事件回收或者清理定时器</p>
+<h3 id="数据更新过程"><a href="#数据更新过程" class="headerlink" title="数据更新过程"></a>数据更新过程</h3><p>componentWillReceiveProps</p>
+<p>shouldComponentUpdate // 不能使用setState</p>
+<p>componentWillUpdate // 不能使用setState</p>
+<p>componentDidUpdate</p>
+<p>如果组件自身的state更新，会依次执行后三个方法，shouldComponentUpdate是一个特殊的方法，他接受需要更新的props和state，让开发者增加必要的条件判断，让其在需要时更新，不需要是不更新。默认为true。可以用此方法进行性能优化。</p>
+<h2 id="React和DOM"><a href="#React和DOM" class="headerlink" title="React和DOM"></a>React和DOM</h2>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/09/git/" rel="next" title="git使用中出现的问题">
+                <i class="fa fa-chevron-left"></i> git使用中出现的问题
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/18/ImmutableJS/" rel="prev" title="Immutable">
+                Immutable <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/01/18/React/"
+           data-title="React学习记录" data-url="http://yoursite.com/2017/01/18/React/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww4.sinaimg.cn/mw690/719c39c3gw1f4jhs5r30dj206o06o74c.jpg"
+               alt="李普阳" />
+          <p class="site-author-name" itemprop="name">李普阳</p>
+          <p class="site-description motion-element" itemprop="description">一个人的命运啊，当然要靠自我奋斗。但是，也要考虑到历史的行程。（手动滑稽</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/p/1005053917294273/home?from=page_100505&mod=TAB&is_all=1#place" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/pzli" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JSX"><span class="nav-number">1.</span> <span class="nav-text">JSX</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vitural-DOM"><span class="nav-number">2.</span> <span class="nav-text">Vitural DOM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数式编程"><span class="nav-number">3.</span> <span class="nav-text">函数式编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React-组件"><span class="nav-number">4.</span> <span class="nav-text">React 组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#React组件的构建方法"><span class="nav-number">4.1.</span> <span class="nav-text">React组件的构建方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#React-createClass"><span class="nav-number">4.1.1.</span> <span class="nav-text">React.createClass</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6-classes"><span class="nav-number">4.1.2.</span> <span class="nav-text">ES6 classes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#无状态函数"><span class="nav-number">4.1.3.</span> <span class="nav-text">无状态函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在React中绑定事件bind-this"><span class="nav-number">5.</span> <span class="nav-text">在React中绑定事件bind(this)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React数据流"><span class="nav-number">6.</span> <span class="nav-text">React数据流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#state"><span class="nav-number">6.1.</span> <span class="nav-text">state</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#props"><span class="nav-number">6.2.</span> <span class="nav-text">props</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用function-prop-与父组件通信"><span class="nav-number">6.2.1.</span> <span class="nav-text">用function prop 与父组件通信</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#propTypes"><span class="nav-number">6.2.2.</span> <span class="nav-text">propTypes</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React生命周期"><span class="nav-number">7.</span> <span class="nav-text">React生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#组件挂载、卸载"><span class="nav-number">7.1.</span> <span class="nav-text">组件挂载、卸载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据更新过程"><span class="nav-number">7.2.</span> <span class="nav-text">数据更新过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React和DOM"><span class="nav-number">8.</span> <span class="nav-text">React和DOM</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李普阳</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"pangzili"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
