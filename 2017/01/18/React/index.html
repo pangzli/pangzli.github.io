@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/01/18/React/index.html">
 <meta property="og:site_name" content="胖子李">
 <meta property="og:description" content="React学习记录。">
-<meta property="og:updated_time" content="2017-03-13T15:53:34.000Z">
+<meta property="og:updated_time" content="2017-03-14T08:53:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React学习记录">
 <meta name="twitter:description" content="React学习记录。">
@@ -387,7 +387,37 @@ boundGetX(); // 返回 81
 <p>componentWillUpdate // 不能使用setState</p>
 <p>componentDidUpdate</p>
 <p>如果组件自身的state更新，会依次执行后三个方法，shouldComponentUpdate是一个特殊的方法，他接受需要更新的props和state，让开发者增加必要的条件判断，让其在需要时更新，不需要是不更新。默认为true。可以用此方法进行性能优化。</p>
-<h2 id="React和DOM"><a href="#React和DOM" class="headerlink" title="React和DOM"></a>React和DOM</h2>
+<h2 id="React和DOM"><a href="#React和DOM" class="headerlink" title="React和DOM"></a>React和DOM</h2><p>从React0.14版本开始，React将涉及DOM操作的部分剥离开，目的是为了抽象React，同时适用于Web端和移动端。ReactDOM的关注点在DOM上，因此只适用于web端。</p>
+<p>在React组建的开发实现中，我们只有在顶层组件以及由于React模型所限必须操作DOM的时候，才会使用它。</p>
+<p>###findDOMNode<br>返回该组件实例对应的DOM节点们可以用于DOM的测量和表单的value值获取。</p>
+<p>findDOMNode只能对已经挂载的组件有效</p>
+<p>###refs</p>
+<p>我们可以利用ReactDOM的render方法得到组建的实例，然后对他进行一些操作。但是在组件内，JSX是不会返回一个组件实例的。</p>
+<p>refs就是为此而生的，他可以附加到任何一个组件上，组件被调用时会新建一个该组件的实例，refs就会指向这个实例。</p>
+<p>它可以是一个回调函数，这个回调函数在组件被挂载后立即执行。</p>
+<p>它也可以是一个字符串。对于DOM操作，不仅可以使用findDOMNode获得该组件DOM，还可以使用refs获得组件内部的DOM。</p>
+<pre><code>// 组件渲染完毕调用的hook函数
+  componentDidMount(){
+    // 获取stage的宽和高
+    let stageDOM = ReactDOM.findDOMNode(this.refs.stage),
+        stageW = stageDOM.scrollWidth,
+        stageH = stageDOM.scrollHeight;
+    // 获得单独一个ImgFigure的宽和高
+    let imgFigDOM = ReactDOM.findDOMNode(this.refs.ImgFigure0),
+        imgW = imgFigDOM.scrollWidth,
+        imgH = imgFigDOM.scrollHeight;
+  }
+</code></pre><p>通过this.refs.XXX获得的是一个实例，需要findDOMNode转化成相应的DOM。</p>
+<p>值得注意的是，findDOMNode和refs都无法用在无状态组件中，无状态组件挂载时只是方法调用，没有新建实例。</p>
+<h2 id="事件系统"><a href="#事件系统" class="headerlink" title="事件系统"></a>事件系统</h2><pre><code>&lt;button onClick={this.handleClick}&gt;Test&lt;/div&gt;
+
+&lt;button onclick=&quot;handleClick()&quot;&gt;Test&lt;/div&gt;
+</code></pre><p>上面的一行是React事件绑定，下面一行是DOM0级事件绑定，可以发现写法比较类似，但是React并不会像DOM0级事件那样将事件处理器直接绑定到HTML元素上，它只是借鉴了这种写法而已。</p>
+<h3 id="事件委派"><a href="#事件委派" class="headerlink" title="事件委派"></a>事件委派</h3><p>React是把所有的事件绑定到结构的最外层，使用一个统一的事件监听器，这个事件监听器上维持了一个映射来保存所有组件内部的事件监听和处理函数。当组件挂载或卸载时，只是在这个统一的事件监听器上插入或删除一些对象。当事件发生时，首先被这个统一的事件监听器处理，然后在映射里找到真正的事件处理函数并调用。</p>
+<p>###自动绑定<br>在组件中，this都指向当前组件，每个方法的上下文都会指向该组件的实例。</p>
+<p>在使用ES6 classes或者纯函数式，这种自动绑定就不存在了，需要手动绑定。</p>
+<p>可以使用bind(this)、箭头函数等方法实现在类定义的组件中绑定this上下文的效果。</p>
+
       
     </div>
 
@@ -545,7 +575,7 @@ boundGetX(); // 返回 81
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MVC-MVVM等常见框架结构"><span class="nav-number">1.</span> <span class="nav-text">MVC/MVVM等常见框架结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSX"><span class="nav-number">2.</span> <span class="nav-text">JSX</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vitural-DOM"><span class="nav-number">3.</span> <span class="nav-text">Vitural DOM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数式编程"><span class="nav-number">4.</span> <span class="nav-text">函数式编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React-组件"><span class="nav-number">5.</span> <span class="nav-text">React 组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#React组件的构建方法"><span class="nav-number">5.1.</span> <span class="nav-text">React组件的构建方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#React-createClass"><span class="nav-number">5.1.1.</span> <span class="nav-text">React.createClass</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6-classes"><span class="nav-number">5.1.2.</span> <span class="nav-text">ES6 classes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#无状态函数"><span class="nav-number">5.1.3.</span> <span class="nav-text">无状态函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在React中绑定事件bind-this"><span class="nav-number">6.</span> <span class="nav-text">在React中绑定事件bind(this)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React数据流"><span class="nav-number">7.</span> <span class="nav-text">React数据流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#state"><span class="nav-number">7.1.</span> <span class="nav-text">state</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#props"><span class="nav-number">7.2.</span> <span class="nav-text">props</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用function-prop-与父组件通信"><span class="nav-number">7.2.1.</span> <span class="nav-text">用function prop 与父组件通信</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#propTypes"><span class="nav-number">7.2.2.</span> <span class="nav-text">propTypes</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React生命周期"><span class="nav-number">8.</span> <span class="nav-text">React生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#组件挂载、卸载"><span class="nav-number">8.1.</span> <span class="nav-text">组件挂载、卸载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据更新过程"><span class="nav-number">8.2.</span> <span class="nav-text">数据更新过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React和DOM"><span class="nav-number">9.</span> <span class="nav-text">React和DOM</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MVC-MVVM等常见框架结构"><span class="nav-number">1.</span> <span class="nav-text">MVC/MVVM等常见框架结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSX"><span class="nav-number">2.</span> <span class="nav-text">JSX</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vitural-DOM"><span class="nav-number">3.</span> <span class="nav-text">Vitural DOM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数式编程"><span class="nav-number">4.</span> <span class="nav-text">函数式编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React-组件"><span class="nav-number">5.</span> <span class="nav-text">React 组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#React组件的构建方法"><span class="nav-number">5.1.</span> <span class="nav-text">React组件的构建方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#React-createClass"><span class="nav-number">5.1.1.</span> <span class="nav-text">React.createClass</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6-classes"><span class="nav-number">5.1.2.</span> <span class="nav-text">ES6 classes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#无状态函数"><span class="nav-number">5.1.3.</span> <span class="nav-text">无状态函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在React中绑定事件bind-this"><span class="nav-number">6.</span> <span class="nav-text">在React中绑定事件bind(this)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React数据流"><span class="nav-number">7.</span> <span class="nav-text">React数据流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#state"><span class="nav-number">7.1.</span> <span class="nav-text">state</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#props"><span class="nav-number">7.2.</span> <span class="nav-text">props</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用function-prop-与父组件通信"><span class="nav-number">7.2.1.</span> <span class="nav-text">用function prop 与父组件通信</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#propTypes"><span class="nav-number">7.2.2.</span> <span class="nav-text">propTypes</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React生命周期"><span class="nav-number">8.</span> <span class="nav-text">React生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#组件挂载、卸载"><span class="nav-number">8.1.</span> <span class="nav-text">组件挂载、卸载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据更新过程"><span class="nav-number">8.2.</span> <span class="nav-text">数据更新过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React和DOM"><span class="nav-number">9.</span> <span class="nav-text">React和DOM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事件系统"><span class="nav-number">10.</span> <span class="nav-text">事件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事件委派"><span class="nav-number">10.1.</span> <span class="nav-text">事件委派</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
