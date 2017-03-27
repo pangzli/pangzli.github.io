@@ -86,15 +86,16 @@
 
 <meta name="description" content="Ajax(Asynchronous JavaScript and XML),异步的JavaScript与XML.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ajax相关">
+<meta property="og:title" content="Ajax与HTTP相关">
 <meta property="og:url" content="http://yoursite.com/2016/09/06/Ajax相关/index.html">
 <meta property="og:site_name" content="胖子李">
 <meta property="og:description" content="Ajax(Asynchronous JavaScript and XML),异步的JavaScript与XML.">
 <meta property="og:image" content="http://i4.buimg.com/567571/aa960010b80ffd66.png">
 <meta property="og:image" content="http://i4.buimg.com/567571/d5f5c0a0f9c2c2a2.png">
-<meta property="og:updated_time" content="2017-03-14T15:59:59.000Z">
+<meta property="og:image" content="https://segmentfault.com/img/remote/1460000006760778">
+<meta property="og:updated_time" content="2017-03-20T03:56:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ajax相关">
+<meta name="twitter:title" content="Ajax与HTTP相关">
 <meta name="twitter:description" content="Ajax(Asynchronous JavaScript and XML),异步的JavaScript与XML.">
 <meta name="twitter:image" content="http://i4.buimg.com/567571/aa960010b80ffd66.png">
 
@@ -119,7 +120,7 @@
 
   <link rel="canonical" href="http://yoursite.com/2016/09/06/Ajax相关/"/>
 
-  <title> Ajax相关 | 胖子李 </title>
+  <title> Ajax与HTTP相关 | 胖子李 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -239,7 +240,7 @@
             
             
               
-                Ajax相关
+                Ajax与HTTP相关
               
             
           </h1>
@@ -477,7 +478,131 @@ callback:&quot;&quot;
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre><p><img src="http://i4.buimg.com/567571/aa960010b80ffd66.png" alt=""><br><img src="http://i4.buimg.com/567571/d5f5c0a0f9c2c2a2.png" alt=""></p>
-<h2 id="常见的HTTP状态"><a href="#常见的HTTP状态" class="headerlink" title="常见的HTTP状态"></a>常见的HTTP状态</h2><p>首先需要了解1~5开头的HTTP状态码分别是什么含义：</p>
+<h2 id="原生实现jsonp"><a href="#原生实现jsonp" class="headerlink" title="原生实现jsonp"></a>原生实现jsonp</h2><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+    &lt;style&gt;
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+        #contents {
+            margin: 100px auto;
+            width: 500px;
+        }
+        #txt {
+            width: 400px;
+        }
+        #datas {
+            border: 1px #ccc solid;
+            width: 400px;
+        }
+        #datas ul {
+            list-style-type: none;
+        }
+    &lt;/style&gt;
+    &lt;script src=&quot;http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;./node_modules/art-template/dist/template-native-debug.js&quot;&gt;&lt;/script&gt;
+    &lt;script id=&quot;tpl&quot; type=&quot;text/html&quot;&gt;
+        &lt;div id=&quot;datas&quot;&gt;
+            &lt;ul&gt;
+                &lt;% for(var i=0; i&lt; s.length; i++) { %&gt;
+                &lt;li&gt;&lt;%= s[i] %&gt;&lt;/li&gt;
+                &lt;% } %&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    &lt;/script&gt;
+    &lt;script&gt;
+        $(function() {
+            var formatParams = function(data) { //格式化参数
+                var arr = [];
+                for (var name in data) {
+                    arr.push(encodeURIComponent(name) + &apos;=&apos; + encodeURIComponent(data[name]));
+                }
+                return arr.join(&apos;&amp;&apos;);
+            }
+            var jsonp = function(options) {
+                options = options || {};
+                if (!options.url || !options.callback) {
+                    throw new Error(&quot;参数不合法&quot;);
+                }
+
+                //创建 script 标签并加入到页面中
+                var callbackName = (&apos;jsonp_&apos; + Math.random()).replace(&quot;.&quot;, &quot;&quot;);
+                var oHead = document.getElementsByTagName(&apos;head&apos;)[0];
+                var params = &quot;&quot;;
+                if (options.data) {
+                    options.data[options.callback] = callbackName;
+                    params += formatParams(options.data);
+                } else {
+                    params += options.callback + &quot;=&quot; + callbackName;
+                }
+                var oS = document.createElement(&apos;script&apos;);
+                oHead.appendChild(oS);
+
+                //创建jsonp回调函数
+                window[callbackName] = function(json) {
+                    oHead.removeChild(oS);
+                    clearTimeout(oS.timer);
+                    window[callbackName] = null;
+                    options.success &amp;&amp; options.success(json);
+                };
+
+                //发送请求
+                oS.src = options.url + &apos;?&apos; + params;
+
+                //超时处理
+                if (options.time) {
+                    oS.timer = setTimeout(function() {
+                        window[callbackName] = null;
+                        oHead.removeChild(oS);
+                        options.fail &amp;&amp; options.fail({
+                            message: &quot;超时&quot;
+                        });
+                    }, options.time);
+                }
+            };
+            // 一定要加这句
+            window.jsonp = jsonp;
+
+            $(&quot;#txt&quot;).keyup(function() {
+                //
+                var key = $(&quot;#txt&quot;).val();
+                //发送异步请求获取数据
+                jsonp({
+                    url: &quot;https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su&quot;,
+                    data: {
+                        &apos;wd&apos;: key
+                    },
+                    callback: &quot;cb&quot;,
+                    time: 1000,
+                    success: function(data) {
+                        $(&quot;#datas&quot;).remove();
+
+                        if (data.s.length &gt; 0) {
+                            var html = template(&quot;tpl&quot;, data);
+                            $(&quot;#contents&quot;).append(html);
+                        }
+
+                    },
+                    error: function(data) {
+                        alert(data.message);
+                    }
+                })
+            });
+        })
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id=&quot;contents&quot;&gt;
+        &lt;input type=&quot;text&quot; name=&quot;&quot; id=&quot;txt&quot;&gt;
+        &lt;input type=&quot;button&quot; value=&quot;搜索&quot; id=&quot;btn&quot;&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h2 id="常见的HTTP状态"><a href="#常见的HTTP状态" class="headerlink" title="常见的HTTP状态"></a>常见的HTTP状态</h2><p>首先需要了解1~5开头的HTTP状态码分别是什么含义：</p>
 <ul>
 <li>1XX  表示消息</li>
 <li>2XX  表示成功</li>
@@ -508,6 +633,16 @@ callback:&quot;&quot;
 <p>  服务器不支持实现请求所需要的功能。</p>
 </li>
 </ul>
+<p>##HTTP请求头<br><img src="https://segmentfault.com/img/remote/1460000006760778" alt=""></p>
+<pre><code>　　POST/GET http://download.microtool.de:80/somedata.exe 
+　　Host: download.microtool.de 
+　　Accept:*/* 
+　　Pragma: no-cache 
+　　Cache-Control: no-cache 
+　　Referer: http://download.microtool.de/ 
+　　User-Agent:Mozilla/4.04[en](Win95;I;Nav) 
+　　Range:bytes=554554- 
+</code></pre><p>cookie在请求头里，请求头还包含Accept、Date、Content-length、Cache-Control、Host、User-Agent等信息。</p>
 
       
     </div>
@@ -569,7 +704,7 @@ callback:&quot;&quot;
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/09/06/Ajax相关/"
-           data-title="Ajax相关" data-url="http://yoursite.com/2016/09/06/Ajax相关/">
+           data-title="Ajax与HTTP相关" data-url="http://yoursite.com/2016/09/06/Ajax相关/">
       </div>
     
   </div>
@@ -666,7 +801,7 @@ callback:&quot;&quot;
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ajax基本介绍"><span class="nav-number">1.</span> <span class="nav-text">Ajax基本介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get和post两种情况的原生Ajax"><span class="nav-number">2.</span> <span class="nav-text">get和post两种情况的原生Ajax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery封装的Ajax"><span class="nav-number">3.</span> <span class="nav-text">jQuery封装的Ajax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jsonp"><span class="nav-number">4.</span> <span class="nav-text">jsonp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#artTemplate"><span class="nav-number">5.</span> <span class="nav-text">artTemplate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个模仿百度首页的例子"><span class="nav-number">6.</span> <span class="nav-text">一个模仿百度首页的例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的HTTP状态"><span class="nav-number">7.</span> <span class="nav-text">常见的HTTP状态</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ajax基本介绍"><span class="nav-number">1.</span> <span class="nav-text">Ajax基本介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get和post两种情况的原生Ajax"><span class="nav-number">2.</span> <span class="nav-text">get和post两种情况的原生Ajax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery封装的Ajax"><span class="nav-number">3.</span> <span class="nav-text">jQuery封装的Ajax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jsonp"><span class="nav-number">4.</span> <span class="nav-text">jsonp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#artTemplate"><span class="nav-number">5.</span> <span class="nav-text">artTemplate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个模仿百度首页的例子"><span class="nav-number">6.</span> <span class="nav-text">一个模仿百度首页的例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原生实现jsonp"><span class="nav-number">7.</span> <span class="nav-text">原生实现jsonp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的HTTP状态"><span class="nav-number">8.</span> <span class="nav-text">常见的HTTP状态</span></a></li></ol></div>
             
           </div>
         </section>
